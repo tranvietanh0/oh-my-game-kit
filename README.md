@@ -67,21 +67,43 @@ npx --yes github:tranvietanh0/oh-my-game-kit uninstall --target global
 
 Releases publish the scoped npm package `@tranvietanh0/oh-my-game-kit` to GitHub Packages.
 
-Configure npm for the GitHub Packages scope:
+### Install as a user
+
+Configure npm to resolve the `@tranvietanh0` scope from GitHub Packages:
 
 ```sh
 npm config set @tranvietanh0:registry https://npm.pkg.github.com
 ```
 
-Then run or install the package:
+If the package or repository is private, create a GitHub personal access token with `read:packages`, then log in:
+
+```sh
+npm login --scope=@tranvietanh0 --registry=https://npm.pkg.github.com
+```
+
+Use your GitHub username as the username and the token as the password. Public packages may not require this login step.
+
+Run the CLI without installing globally:
 
 ```sh
 npx --yes @tranvietanh0/oh-my-game-kit validate
-npm install --global @tranvietanh0/oh-my-game-kit
-omg-kit install --target global --fresh --preset full
+npx --yes @tranvietanh0/oh-my-game-kit doctor --target global
+npx --yes @tranvietanh0/oh-my-game-kit install --target project --preset unity-minimal
 ```
 
-Publishing is handled by the `Publish GitHub Package` GitHub Actions workflow when a release is published, and can also be started manually from GitHub Actions.
+Or install it globally once:
+
+```sh
+npm install --global @tranvietanh0/oh-my-game-kit
+omg-kit install --target global --fresh --preset full
+omg-kit doctor --target global
+```
+
+### Publish a new package version
+
+Publishing is handled by the `Publish GitHub Package` GitHub Actions workflow when a GitHub Release is published, and can also be started manually from GitHub Actions.
+
+Before publishing again, update `package.json` to a new version and create a matching release tag, for example `v0.1.1`.
 
 ## Local Development
 

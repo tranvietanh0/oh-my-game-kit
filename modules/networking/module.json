@@ -1,0 +1,25 @@
+{
+  "name": "networking",
+  "version": "1.8.0",
+  "description": "Multiplayer and netcode systems",
+  "required": false,
+  "dependencies": {
+    "base": ">=1.0.0"
+  },
+  "skills": [
+    "omg-unity-networking-netcode"
+  ],
+  "agents": [],
+  "detect": {
+    "files": [
+      "**/*.cs"
+    ],
+    "anyOf": [
+      {
+        "pattern": "NetworkBehaviour|NetworkManager|NetworkVariable|\\[Rpc\\]",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-unity"
+}

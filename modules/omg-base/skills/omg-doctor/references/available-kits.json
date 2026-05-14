@@ -1,0 +1,32 @@
+{
+  "_comment": "SSOT for KitType <-> repo mapping. Mirrors AVAILABLE_KITS in oh-my-game-kit-cli/src/types/kit.ts. When a new kit is added, update BOTH this file AND the CLI constant. Consumed by check-kits-membership.cjs and any other doctor .cjs scripts that need the mapping. The CLI source is the primary source; this JSON is a release-time mirror.",
+  "kits": {
+    "core": {
+      "repo": "oh-my-game-kit-core"
+    },
+    "designer": {
+      "repo": "oh-my-game-kit-designer"
+    },
+    "unity": {
+      "repo": "oh-my-game-kit-unity"
+    },
+    "cocos": {
+      "repo": "oh-my-game-kit-cocos"
+    },
+    "react-native": {
+      "repo": "oh-my-game-kit-rn"
+    },
+    "nakama": {
+      "repo": "oh-my-game-kit-nakama"
+    },
+    "web": {
+      "repo": "oh-my-game-kit-web"
+    }
+  },
+  "_origin": {
+    "kit": "oh-my-game-kit-core",
+    "repository": "The1Studio/oh-my-game-kit-core",
+    "module": "omg-base",
+    "protected": true
+  }
+}

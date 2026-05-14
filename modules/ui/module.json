@@ -1,0 +1,29 @@
+{
+  "name": "ui",
+  "version": "1.8.0",
+  "description": "UI systems: UGUI, UI Toolkit, mobile-responsive layouts",
+  "required": true,
+  "dependencies": {
+    "base": ">=1.0.0"
+  },
+  "skills": [
+    "omg-unity-ui-ugui",
+    "omg-unity-ui-toolkit",
+    "omg-unity-ui-mobile-ui"
+  ],
+  "agents": [],
+  "detect": {
+    "files": [
+      "**/*.cs",
+      "**/*.uxml",
+      "**/*.uss"
+    ],
+    "anyOf": [
+      {
+        "pattern": "VisualElement|UIDocument|PanelSettings|CanvasScaler|LayoutGroup|UnityEngine\\.UI",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-unity"
+}

@@ -1,0 +1,174 @@
+/* Professional legal/business document stylesheet */
+@page {
+  size: A4;
+  margin: 2.5cm 2cm 2.5cm 2cm;
+}
+
+html {
+  font-size: 11pt;
+}
+
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.55;
+  color: #1a1a1a;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 3rem 2rem;
+  background: #fff;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Cover / title */
+h1 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 26pt;
+  font-weight: 600;
+  color: #0b2545;
+  text-align: center;
+  margin: 1rem 0 2rem 0;
+  padding-bottom: 0.8rem;
+  border-bottom: 3px double #0b2545;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15pt;
+  font-weight: 600;
+  color: #0b2545;
+  margin-top: 2.2rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #d0d7de;
+  page-break-after: avoid;
+}
+
+h3 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12pt;
+  font-weight: 600;
+  color: #13315c;
+  margin-top: 1.6rem;
+  margin-bottom: 0.6rem;
+  page-break-after: avoid;
+}
+
+h4 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 11pt;
+  font-weight: 600;
+  color: #13315c;
+  margin-top: 1.2rem;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  page-break-after: avoid;
+}
+
+p { margin: 0.5rem 0 0.8rem 0; }
+strong { color: #0b2545; font-weight: 600; }
+em { color: #444; }
+
+/* Links */
+a { color: #0b2545; text-decoration: underline; text-underline-offset: 2px; }
+
+/* Lists */
+ul, ol {
+  padding-left: 1.4rem;
+  margin: 0.4rem 0 1rem 0;
+}
+li { margin: 0.25rem 0; text-align: left; }
+li > p { margin: 0.25rem 0; }
+
+/* Professional tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.4rem 0;
+  font-size: 10.5pt;
+  page-break-inside: avoid;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  border-radius: 3px;
+  overflow: hidden;
+}
+thead tr {
+  background: #0b2545;
+  color: #ffffff;
+}
+th {
+  text-align: left;
+  padding: 8px 10px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 10pt;
+  border-bottom: 2px solid #1a365d;
+}
+td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #e3e8ee;
+  vertical-align: top;
+  text-align: left;
+}
+tbody tr:nth-child(even) { background: #f7f9fc; }
+tbody tr:hover { background: #eef4fb; }
+td strong, th strong { color: inherit; }
+
+/* Horizontal rules as section dividers */
+hr {
+  border: none;
+  border-top: 1px solid #c9d2dd;
+  margin: 2rem 0;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 3px solid #0b2545;
+  padding: 0.3rem 0 0.3rem 1rem;
+  margin: 1rem 0;
+  color: #334;
+  font-style: italic;
+}
+
+/* Code / inline */
+code {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  background: #f2f4f7;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+pre { background: #f7f9fc; padding: 1rem; border-left: 3px solid #c9d2dd; overflow-x: auto; }
+
+/* Signature block */
+.signature-block {
+  margin-top: 3rem;
+  page-break-inside: avoid;
+}
+
+/* Document meta header */
+.doc-meta {
+  text-align: center;
+  color: #555;
+  font-size: 10pt;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+/* Status badges in tables */
+td:first-child strong { color: #0b2545; }
+
+/* Print-friendly adjustments */
+@media print {
+  body { padding: 0; max-width: none; }
+  h1 { page-break-before: avoid; }
+  h2 { page-break-before: auto; }
+  table, blockquote, .signature-block { page-break-inside: avoid; }
+  tr { page-break-inside: avoid; page-break-after: auto; }
+  thead { display: table-header-group; }
+}
+
+/* Utility */
+.pagebreak { page-break-before: always; }

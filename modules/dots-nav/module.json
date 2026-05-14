@@ -1,0 +1,27 @@
+{
+  "name": "dots-nav",
+  "version": "1.8.0",
+  "description": "DOTS navigation, pathfinding, avoidance and battlefield systems",
+  "required": false,
+  "dependencies": {
+    "base": ">=1.0.0",
+    "dots-core": ">=1.0.0"
+  },
+  "skills": [
+    "omg-unity-dots-nav-agents-navigation",
+    "omg-unity-dots-nav-battlefield"
+  ],
+  "agents": [],
+  "detect": {
+    "files": [
+      "**/*.cs"
+    ],
+    "anyOf": [
+      {
+        "pattern": "NavMeshAgent|AgentBody|NavMeshPath|CrowdSurface",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-unity"
+}

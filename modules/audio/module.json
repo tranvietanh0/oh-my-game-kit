@@ -1,0 +1,25 @@
+{
+  "name": "audio",
+  "version": "1.8.0",
+  "description": "Unity audio system: AudioSource, AudioMixer, music pooling",
+  "required": true,
+  "dependencies": {
+    "base": ">=1.0.0"
+  },
+  "skills": [
+    "omg-unity-audio-core"
+  ],
+  "agents": [],
+  "detect": {
+    "files": [
+      "**/*.cs"
+    ],
+    "anyOf": [
+      {
+        "pattern": "AudioSource|AudioMixer|AudioClip",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-unity"
+}

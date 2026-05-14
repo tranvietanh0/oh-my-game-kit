@@ -1,0 +1,25 @@
+{
+  "name": "mobile",
+  "version": "1.8.0",
+  "description": "Mobile platform targeting: Android, iOS build settings and optimization",
+  "required": false,
+  "dependencies": {
+    "base": ">=1.0.0"
+  },
+  "skills": [
+    "omg-unity-mobile-core"
+  ],
+  "agents": [],
+  "detect": {
+    "files": [
+      "**/*.cs"
+    ],
+    "anyOf": [
+      {
+        "pattern": "Application\\.platform|TouchPhase|SystemInfo\\.deviceModel|RuntimePlatform\\.(Android|IPhone)",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-unity"
+}

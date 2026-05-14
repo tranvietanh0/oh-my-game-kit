@@ -1,0 +1,327 @@
+{
+  "schemaVersion": "1.0.0",
+  "_origin": {
+    "kit": "oh-my-game-kit-core",
+    "repository": "The1Studio/oh-my-game-kit-core",
+    "module": "omg-extended",
+    "protected": true
+  },
+  "_notes": [
+    "This is the CORE install catalog — tools shipped and managed by omg-extended.",
+    "Per-engine presets (unity, cocos, rn, web, nakama) are REFERENCE ONLY here.",
+    "At runtime, `adapter-install-reader.ts` derives per-engine presets from each",
+    "installed adapter's own install.json (Rule 6 — no hardcoded engine maps in core).",
+    "The static entries below are used only when no adapter is installed.",
+    "Version pins: graphviz uses '*' because it is a system package managed by the",
+    "platform package manager and has no meaningful semver pin at this level.",
+    "RESEARCH_NEEDED items must be resolved before Phase 1 release."
+  ],
+  "_todo": [],
+  "catalog": {
+    "mermaid-cli": {
+      "handler": "npm-global",
+      "package": "@mermaid-js/mermaid-cli",
+      "version": "10.9.1",
+      "verify": {
+        "command": "mmdc",
+        "args": [
+          "--version"
+        ],
+        "matches": "10\\.\\d+\\.\\d+"
+      },
+      "prerequisites": [
+        {
+          "name": "node",
+          "minVersion": "18.0.0",
+          "check": "node --version",
+          "installHintUrl": "https://nodejs.org/en/download"
+        },
+        {
+          "name": "npm",
+          "minVersion": "8.0.0",
+          "check": "npm --version",
+          "installHintUrl": "https://nodejs.org/en/download"
+        }
+      ],
+      "uninstall": "npm uninstall -g @mermaid-js/mermaid-cli"
+    },
+    "graphviz": {
+      "handler": "package-manager",
+      "packages": {
+        "apt": "graphviz",
+        "dnf": "graphviz",
+        "pacman": "graphviz",
+        "zypper": "graphviz",
+        "brew": "graphviz",
+        "choco": "graphviz",
+        "winget": "Graphviz.Graphviz"
+      },
+      "version": "*",
+      "verify": {
+        "command": "dot",
+        "args": [
+          "-V"
+        ],
+        "matches": "dot - graphviz"
+      },
+      "prerequisites": []
+    },
+    "d2": {
+      "handler": "binary-download",
+      "version": "0.7.1",
+      "urls": {
+        "linux-amd64": "https://github.com/terrastruct/d2/releases/download/v{version}/d2-v{version}-linux-amd64.tar.gz",
+        "linux-arm64": "https://github.com/terrastruct/d2/releases/download/v{version}/d2-v{version}-linux-arm64.tar.gz",
+        "darwin-amd64": "https://github.com/terrastruct/d2/releases/download/v{version}/d2-v{version}-macos-amd64.tar.gz",
+        "darwin-arm64": "https://github.com/terrastruct/d2/releases/download/v{version}/d2-v{version}-macos-arm64.tar.gz",
+        "win32-x64": "https://github.com/terrastruct/d2/releases/download/v{version}/d2-v{version}-windows-amd64.zip"
+      },
+      "binaryName": {
+        "linux": "d2",
+        "darwin": "d2",
+        "win32": "d2.exe"
+      },
+      "installDir": "~/.agents/tools",
+      "sha256": {
+        "linux-amd64": "eb172adf59f38d1e5a70ab177591356754ffaf9bebb84e0ca8b767dfb421dad7",
+        "linux-arm64": "ce3a0b985a8f91335a826c254b3a88736fd81afcdd08b58f6c749d2add6864b0",
+        "darwin-amd64": "b0178e8fdae72194d5a23aa6effd323378cc58ccd3b08d175ab80371c14e106f",
+        "darwin-arm64": "80de85f3b0ac7d9569acac0780ed65dd994ea78969b6b230c58bbb2c6113465b",
+        "win32-x64": "d289c2866221c618c9fc6efcd416ee8c16e122bd0100761aea51001e3c958f57"
+      },
+      "verify": {
+        "command": "d2",
+        "args": [
+          "--version"
+        ],
+        "matches": "v\\d+\\.\\d+\\.\\d+"
+      },
+      "prerequisites": []
+    },
+    "plantuml": {
+      "handler": "jar-download",
+      "jarName": "plantuml.jar",
+      "installDir": "~/.agents/tools",
+      "url": "https://github.com/plantuml/plantuml/releases/download/v{version}/plantuml-{version}.jar",
+      "version": "1.2026.2",
+      "sha256": "3cdce52133c424dea22425b947ae9d47f2167b0866dfcf99e714d4ea1689975c",
+      "verify": {
+        "command": "java",
+        "args": [
+          "-jar",
+          "~/.agents/tools/plantuml.jar",
+          "-version"
+        ],
+        "matches": "PlantUML version \\d+"
+      },
+      "prerequisites": [
+        {
+          "name": "java",
+          "minVersion": "11",
+          "check": "java -version",
+          "installHintUrl": "https://adoptium.net/temurin/releases/"
+        }
+      ],
+      "uninstall": "rm -f ~/.agents/tools/plantuml.jar"
+    },
+    "structurizr": {
+      "handler": "jar-download",
+      "jarName": "structurizr-cli.jar",
+      "installDir": "~/.agents/tools",
+      "url": "https://github.com/structurizr/cli/releases/download/v{version}/structurizr-cli.jar",
+      "version": "2025.11.09",
+      "sha256": "68b4feb3053cb138ac90ef09ede1d503f0514054694456c0c22a4c4b81129c00",
+      "verify": {
+        "command": "java",
+        "args": [
+          "-jar",
+          "~/.agents/tools/structurizr-cli.jar"
+        ],
+        "matches": "Structurizr CLI"
+      },
+      "prerequisites": [
+        {
+          "name": "java",
+          "minVersion": "17",
+          "check": "java -version",
+          "installHintUrl": "https://adoptium.net/temurin/releases/"
+        }
+      ],
+      "uninstall": "rm -f ~/.agents/tools/structurizr-cli.jar"
+    },
+    "cs2mermaid": {
+      "handler": "dotnet-tool",
+      "package": "Cs2Mermaid",
+      "version": "0.6.0",
+      "verify": {
+        "command": "cs2mmd",
+        "args": [
+          "--version"
+        ],
+        "matches": "0\\.6\\.0"
+      },
+      "prerequisites": [
+        {
+          "name": ".NET SDK",
+          "minVersion": "8.0.0",
+          "check": "dotnet --list-sdks",
+          "installHintUrl": "https://dotnet.microsoft.com/download/dotnet/8.0"
+        }
+      ],
+      "uninstall": "dotnet tool uninstall -g Cs2Mermaid"
+    },
+    "ts-morph": {
+      "handler": "npm-project",
+      "package": "ts-morph",
+      "version": "28.0.0",
+      "installMode": "per-project",
+      "installHint": "npm install --save-dev ts-morph@{version}",
+      "verify": {
+        "command": "node",
+        "args": [
+          "-e",
+          "require('ts-morph'); process.exit(0)"
+        ],
+        "matches": ""
+      },
+      "prerequisites": [
+        {
+          "name": "npm",
+          "minVersion": "8.0.0",
+          "check": "npm --version",
+          "installHintUrl": "https://nodejs.org/en/download"
+        }
+      ]
+    },
+    "dependency-cruiser": {
+      "handler": "npm-project",
+      "package": "dependency-cruiser",
+      "version": "17.3.10",
+      "installMode": "per-project",
+      "installHint": "npm install --save-dev dependency-cruiser@17.3.10",
+      "verify": {
+        "command": "npx",
+        "args": [
+          "depcruise",
+          "--version"
+        ],
+        "matches": "17\\.\\d+\\.\\d+"
+      },
+      "prerequisites": [
+        {
+          "name": "npm",
+          "minVersion": "8.0.0",
+          "check": "npm --version",
+          "installHintUrl": "https://nodejs.org/en/download"
+        }
+      ]
+    },
+    "tsuml2": {
+      "handler": "npm-project",
+      "package": "tsuml2",
+      "version": "0.17.1",
+      "installMode": "per-project",
+      "installHint": "npm install --save-dev tsuml2@0.17.1",
+      "verify": {
+        "command": "npx",
+        "args": [
+          "tsuml2",
+          "--version"
+        ],
+        "matches": "0\\.17\\.\\d+"
+      },
+      "prerequisites": [
+        {
+          "name": "npm",
+          "minVersion": "8.0.0",
+          "check": "npm --version",
+          "installHintUrl": "https://nodejs.org/en/download"
+        }
+      ]
+    }
+  },
+  "presets": {
+    "minimal": {
+      "tools": [
+        "mermaid-cli"
+      ],
+      "description": "Default minimum — renders any Mermaid diagram. No source-code analysis."
+    },
+    "full": {
+      "tools": [
+        "mermaid-cli",
+        "graphviz",
+        "d2",
+        "plantuml",
+        "structurizr",
+        "cs2mermaid",
+        "ts-morph",
+        "dependency-cruiser",
+        "tsuml2"
+      ],
+      "description": "All 9 core tools. npm-project tools (ts-morph, dependency-cruiser, tsuml2) are flagged per-project; global install requires --global flag.",
+      "derivedAtRuntime": true,
+      "runtimeNote": "At runtime, `full` is the union of all discovered adapter requirements plus all core renderers. The static list above is a documentation baseline."
+    },
+    "web": {
+      "tools": [
+        "mermaid-cli",
+        "graphviz",
+        "dependency-cruiser",
+        "ts-morph",
+        "tsuml2"
+      ],
+      "description": "TypeScript/JavaScript web stack. dependency-cruiser for module graphs, ts-morph for class analysis, tsuml2 as ready-made alternative.",
+      "derivedAtRuntime": true,
+      "runtimeNote": "Derived at runtime from installed web adapters. This static list is used only when no web adapter is installed."
+    },
+    "rn": {
+      "tools": [
+        "mermaid-cli",
+        "graphviz",
+        "dependency-cruiser",
+        "ts-morph"
+      ],
+      "description": "React Native stack. dependency-cruiser for module graphs + platform-variant rules, ts-morph for Redux slice analysis.",
+      "derivedAtRuntime": true,
+      "runtimeNote": "Derived at runtime from installed rn adapters. This static list is used only when no rn adapter is installed."
+    },
+    "cocos": {
+      "tools": [
+        "mermaid-cli",
+        "graphviz",
+        "ts-morph",
+        "dependency-cruiser"
+      ],
+      "description": "Cocos Creator stack. ts-morph for @ccclass decorator analysis, dependency-cruiser for TypeScript module graph.",
+      "derivedAtRuntime": true,
+      "runtimeNote": "Derived at runtime from installed cocos adapters. This static list is used only when no cocos adapter is installed."
+    },
+    "unity": {
+      "tools": [
+        "mermaid-cli",
+        "graphviz",
+        "cs2mermaid"
+      ],
+      "description": "Unity stack. mermaid-cli for rendering, graphviz for DOT diagrams, cs2mermaid (Roslyn) for C# class diagrams.",
+      "derivedAtRuntime": true,
+      "runtimeNote": "Derived at runtime from installed unity adapters. cs2mermaid version is supplied by the Unity adapter install.json, not pinned here per BLOCKER 4."
+    },
+    "nakama": {
+      "tools": [
+        "mermaid-cli",
+        "graphviz"
+      ],
+      "description": "Nakama backend stack. Core provides mermaid-cli and graphviz. The nakama adapter ships its own go-install handler for godepgraph — that tool is NOT in the core catalog.",
+      "derivedAtRuntime": true,
+      "runtimeNote": "Derived at runtime from installed nakama adapters. godepgraph is installed by the nakama adapter's own install.json via its bundled go-install.cjs handler."
+    },
+    "designer": {
+      "tools": [
+        "mermaid-cli"
+      ],
+      "description": "Game designer kit stack. Lightweight — Mermaid-only for flow diagrams and state machines.",
+      "derivedAtRuntime": false
+    }
+  }
+}

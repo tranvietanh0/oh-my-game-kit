@@ -1,0 +1,14 @@
+{
+  "name": "omg-finance",
+  "version": "0.17.2",
+  "description": "CFO-grade finance skill — audience-aware reporting (investor, board, ops, founder), P&L, runway, unit economics, client concentration, multi-currency, data modeling. Reusable across SaaS, services, product, and ad-arbitrage businesses.",
+  "required": false,
+  "dependencies": {
+    "omg-base": ">=1.62.0"
+  },
+  "skills": [
+    "omg-finance"
+  ],
+  "agents": [],
+  "source": "upstream-core"
+}

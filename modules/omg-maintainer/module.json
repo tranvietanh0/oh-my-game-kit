@@ -1,0 +1,29 @@
+{
+  "name": "omg-maintainer",
+  "version": "1.105.1",
+  "description": "Kit maintainer tools — release, triage, sync, scaffolding",
+  "required": true,
+  "dependencies": {
+    "omg-base": ">=1.62.0"
+  },
+  "skills": [
+    "omg-kit",
+    "omg-skill-creator",
+    "omg-agent-creator",
+    "omg-sync-back",
+    "omg-issue",
+    "omg-triage",
+    "omg-ship",
+    "omg-babysit-pr",
+    "omg-worktree",
+    "omg-repomix",
+    "omg-xia",
+    "omg-graphify",
+    "omg-contribution-score"
+  ],
+  "agents": [
+    "omg-kit-developer",
+    "omg-skills-manager"
+  ],
+  "source": "upstream-core"
+}

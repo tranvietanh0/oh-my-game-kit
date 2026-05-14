@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 3,
+  "name": "polygonart-fixture",
+  "kits": {
+    "unity": {
+      "version": "1.2.3",
+      "installedAt": "2026-04-18T03:43:30Z",
+      "files": []
+    },
+    "web": {
+      "version": "0.4.0",
+      "installedAt": "2026-04-17T11:22:10Z"
+    },
+    "core": {
+      "version": "1.69.1",
+      "installedAt": "2026-04-18T12:25:26Z",
+      "files": [
+        ".agents/rules/security.md",
+        ".agents/skillsomg-doctor/SKILL.md"
+      ]
+    }
+  },
+  "_origin": {
+    "kit": "oh-my-game-kit-core",
+    "repository": "The1Studio/oh-my-game-kit-core",
+    "module": "omg-base",
+    "protected": true
+  }
+}

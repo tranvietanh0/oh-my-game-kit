@@ -1,0 +1,38 @@
+{
+  "name": "omg-base",
+  "version": "1.101.3",
+  "description": "Core workflow — cook, plan, fix, debug, test, review, git, docs",
+  "required": true,
+  "dependencies": {},
+  "skills": [
+    "omg-cook",
+    "omg-plan",
+    "omg-fix",
+    "omg-debug",
+    "omg-test",
+    "omg-review",
+    "omg-git",
+    "omg-docs",
+    "omg-wiki",
+    "omg-scout",
+    "omg-ask",
+    "omg-help",
+    "omg-doctor",
+    "omg-modules",
+    "omg-find-skill",
+    "omg-context",
+    "omg-watzup"
+  ],
+  "agents": [
+    "omg-planner",
+    "omg-fullstack-developer",
+    "omg-git-manager",
+    "omg-project-manager",
+    "omg-debugger",
+    "omg-tester",
+    "omg-code-reviewer",
+    "omg-code-simplifier",
+    "omg-docs-manager"
+  ],
+  "source": "upstream-core"
+}

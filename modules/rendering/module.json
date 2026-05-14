@@ -1,0 +1,46 @@
+{
+  "name": "rendering",
+  "version": "1.8.0",
+  "description": "Rendering pipeline (URP), shaders, VFX, lighting, terrain, perspectives, Synty assets",
+  "required": false,
+  "dependencies": {
+    "base": ">=1.0.0"
+  },
+  "skills": [
+    "omg-unity-rendering-urp",
+    "omg-unity-rendering-shader-graph",
+    "omg-unity-rendering-shadow-optimization",
+    "omg-unity-rendering-light-baking",
+    "omg-unity-rendering-terrain",
+    "omg-unity-rendering-probuilder",
+    "omg-unity-rendering-dots-graphics",
+    "omg-unity-rendering-amplify-impostors",
+    "omg-unity-rendering-mk-toon-shader",
+    "omg-unity-rendering-synty-polygon-fantasy-rivals",
+    "omg-unity-rendering-synty-polygon-generic",
+    "omg-unity-rendering-synty-polygon-knights",
+    "omg-unity-rendering-vfx-graph",
+    "omg-unity-rendering-animation-vfx",
+    "omg-unity-rendering-cinemachine",
+    "omg-unity-rendering-dots-perspective-framework",
+    "omg-unity-rendering-dots-perspective-2d-sideview",
+    "omg-unity-rendering-dots-perspective-2d-topdown",
+    "omg-unity-rendering-dots-perspective-3d",
+    "omg-unity-rendering-dots-perspective-isometric"
+  ],
+  "agents": [],
+  "detect": {
+    "files": [
+      "**/*.cs",
+      "**/*.shader",
+      "**/*.shadergraph"
+    ],
+    "anyOf": [
+      {
+        "pattern": "UniversalRenderPipelineAsset|ScriptableRendererFeature|VolumeComponent|Shader\\s+\"",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-unity"
+}

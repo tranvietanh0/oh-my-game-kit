@@ -1,0 +1,35 @@
+{
+  "name": "omg-extended",
+  "version": "1.89.3",
+  "description": "Advanced reasoning, collaboration, and security tools",
+  "required": true,
+  "dependencies": {
+    "omg-base": ">=1.62.0"
+  },
+  "skills": [
+    "omg-brainstorm",
+    "omg-predict",
+    "omg-scenario",
+    "omg-problem-solve",
+    "omg-think",
+    "omg-security",
+    "omg-preview",
+    "omg-handoff",
+    "omg-retro",
+    "omg-team",
+    "omg-mcp-management",
+    "omg-contract",
+    "omg-contract-review",
+    "omg-negotiation",
+    "omg-architecture",
+    "omg-game-arch",
+    "omg-my-score",
+    "omg-find-issue"
+  ],
+  "agents": [
+    "omg-brainstormer",
+    "omg-researcher",
+    "omg-mcp-manager"
+  ],
+  "source": "upstream-core"
+}

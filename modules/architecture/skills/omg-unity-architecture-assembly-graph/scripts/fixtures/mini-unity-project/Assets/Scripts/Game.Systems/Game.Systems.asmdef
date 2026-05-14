@@ -1,0 +1,15 @@
+{
+  "name": "Game.Systems",
+  "references": [
+    "GUID:aaaa1111bbbb2222cccc3333dddd4444"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

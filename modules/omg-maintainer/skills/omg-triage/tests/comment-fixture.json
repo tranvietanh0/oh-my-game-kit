@@ -1,0 +1,47 @@
+{
+  "number": 37,
+  "title": "Problem A",
+  "body": "problem A",
+  "author": {
+    "login": "reporter",
+    "authorAssociation": "NONE"
+  },
+  "labels": [
+    "bug"
+  ],
+  "createdAt": "2026-04-17T12:00:00Z",
+  "comments": [
+    {
+      "author": {
+        "login": "maintainer"
+      },
+      "authorAssociation": "OWNER",
+      "body": "Thanks for the report — root cause is B, not A. Will fix in a follow-up.",
+      "createdAt": "2026-04-18T08:00:00Z",
+      "reactionGroups": [
+        {
+          "content": "THUMBS_UP",
+          "users": {
+            "totalCount": 4
+          }
+        }
+      ]
+    },
+    {
+      "author": {
+        "login": "drive-by"
+      },
+      "authorAssociation": "NONE",
+      "body": "I also see problem A on my machine.",
+      "createdAt": "2026-04-18T09:00:00Z",
+      "reactionGroups": []
+    }
+  ],
+  "reviews": [],
+  "_origin": {
+    "kit": "oh-my-game-kit-core",
+    "repository": "The1Studio/oh-my-game-kit-core",
+    "module": "omg-maintainer",
+    "protected": true
+  }
+}

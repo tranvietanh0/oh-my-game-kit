@@ -1,0 +1,27 @@
+{
+  "contractVersion": "1.0.0",
+  "engine": "unity",
+  "installSteps": [
+    {
+      "target": "cs2mermaid",
+      "handler": "dotnet-tool",
+      "version": "0.6.0"
+    }
+  ],
+  "prerequisites": [
+    {
+      "name": ".NET SDK 8",
+      "check": "dotnet --list-sdks"
+    }
+  ],
+  "requires": [
+    "cs2mermaid",
+    "mermaid-cli"
+  ],
+  "_origin": {
+    "kit": "oh-my-game-kit-core",
+    "repository": "The1Studio/oh-my-game-kit-core",
+    "module": "omg-extended",
+    "protected": true
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "editor",
+  "version": "1.8.0",
+  "description": "Editor tooling: scene tools, playtesting, balance, profiling, milestones, wiki, sync, inventory editor",
+  "required": true,
+  "dependencies": {
+    "base": ">=1.0.0"
+  },
+  "skills": [
+    "omg-unity-editor-scene",
+    "omg-unity-editor-playtest",
+    "omg-unity-editor-balance",
+    "omg-unity-editor-profile",
+    "omg-unity-editor-milestone",
+    "omg-unity-editor-wiki",
+    "omg-unity-editor-sync",
+    "omg-unity-editor-profiling",
+    "omg-unity-editor-dots-inventory-grid"
+  ],
+  "agents": [],
+  "detect": {
+    "files": [
+      "**/Editor/**/*.cs",
+      "**/*.cs"
+    ],
+    "anyOf": [
+      {
+        "pattern": "UnityEditor|EditorWindow|\\[CustomEditor",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-unity"
+}

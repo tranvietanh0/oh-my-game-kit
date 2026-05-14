@@ -1,0 +1,14 @@
+{
+  "name": "architecture",
+  "version": "1.7.0",
+  "description": "Unity architecture diagram adapter: .asmdef graph, Roslyn class diagrams with Unity stereotypes, UPM package deps, C4 architecture views",
+  "required": false,
+  "dependencies": {
+    "omg-extended": ">=1.65.0 <2.0.0"
+  },
+  "skills": [
+    "omg-unity-architecture-assembly-graph"
+  ],
+  "agents": [],
+  "source": "upstream-unity"
+}

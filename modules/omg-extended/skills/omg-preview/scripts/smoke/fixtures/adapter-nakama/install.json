@@ -1,0 +1,26 @@
+{
+  "contractVersion": "1.0.0",
+  "engine": "nakama",
+  "installSteps": [
+    {
+      "target": "mermaid-cli",
+      "handler": "npm-global",
+      "version": "10.9.1"
+    }
+  ],
+  "prerequisites": [
+    {
+      "name": "npm >= 8",
+      "check": "npm --version"
+    }
+  ],
+  "requires": [
+    "mermaid-cli"
+  ],
+  "_origin": {
+    "kit": "oh-my-game-kit-core",
+    "repository": "The1Studio/oh-my-game-kit-core",
+    "module": "omg-extended",
+    "protected": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "oh-my-game-kit",
+  "version": "0.1.0",
+  "description": "Codex-native game development skills and workflows",
+  "type": "module",
+  "bin": {
+    "omg-kit": "src/cli.js"
+  },
+  "scripts": {
+    "validate": "node src/cli.js validate",
+    "doctor": "node src/cli.js doctor",
+    "test": "node tests/smoke.test.js",
+    "install:local": "node src/cli.js install --target global --fresh --preset unity-minimal"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "license": "MIT"
+}

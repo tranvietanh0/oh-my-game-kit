@@ -1,0 +1,29 @@
+{
+  "name": "testing",
+  "version": "1.8.0",
+  "description": "Test framework: DOTS unit testing, workflow, code coverage, runtime validation",
+  "required": false,
+  "dependencies": {
+    "base": ">=1.0.0"
+  },
+  "skills": [
+    "omg-unity-testing-dots-unit-testing",
+    "omg-unity-testing-workflow",
+    "omg-unity-testing-code-coverage",
+    "omg-unity-testing-dots-runtime-validator"
+  ],
+  "agents": [],
+  "detect": {
+    "files": [
+      "**/Tests/**/*.cs",
+      "**/*.cs"
+    ],
+    "anyOf": [
+      {
+        "pattern": "\\[Test\\]|\\[UnityTest\\]|using NUnit",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-unity"
+}

@@ -1,0 +1,80 @@
+{
+  "name": "tof",
+  "version": "1.6.0",
+  "description": "TheOneFeature package skills — per-module guides for 50 features + 5 core subsystems of The1Studio/TheOneFeature (IAP, BattlePass, DailyReward, Gacha, etc.)",
+  "required": false,
+  "dependencies": {
+    "base": ">=1.0.0"
+  },
+  "skills": [
+    "omg-unity-tof-authentication",
+    "omg-unity-tof-battle-pass",
+    "omg-unity-tof-booster",
+    "omg-unity-tof-card-collection",
+    "omg-unity-tof-claim-reward",
+    "omg-unity-tof-collectible-object",
+    "omg-unity-tof-core-adapters",
+    "omg-unity-tof-core-data",
+    "omg-unity-tof-core-editor",
+    "omg-unity-tof-core-extensions",
+    "omg-unity-tof-core-tracking",
+    "omg-unity-tof-currency-progress",
+    "omg-unity-tof-daily-mission",
+    "omg-unity-tof-daily-reward",
+    "omg-unity-tof-donate",
+    "omg-unity-tof-economy-entry",
+    "omg-unity-tof-endless-treasure",
+    "omg-unity-tof-external-data",
+    "omg-unity-tof-feature-conditions",
+    "omg-unity-tof-feature-entry",
+    "omg-unity-tof-firebase",
+    "omg-unity-tof-free-pack",
+    "omg-unity-tof-ftue",
+    "omg-unity-tof-gacha",
+    "omg-unity-tof-gameplay",
+    "omg-unity-tof-iaaentry",
+    "omg-unity-tof-iap",
+    "omg-unity-tof-initial-fund",
+    "omg-unity-tof-inventory",
+    "omg-unity-tof-leaderboard",
+    "omg-unity-tof-lives",
+    "omg-unity-tof-localization",
+    "omg-unity-tof-lucky-pick",
+    "omg-unity-tof-milestone-streak",
+    "omg-unity-tof-no-internet",
+    "omg-unity-tof-notification",
+    "omg-unity-tof-period-reward-ads",
+    "omg-unity-tof-piggy-bank",
+    "omg-unity-tof-playfab",
+    "omg-unity-tof-potential-loss",
+    "omg-unity-tof-profile",
+    "omg-unity-tof-progression-reward",
+    "omg-unity-tof-race-event",
+    "omg-unity-tof-rate-us",
+    "omg-unity-tof-reward-animation",
+    "omg-unity-tof-screen-protection",
+    "omg-unity-tof-secret-store",
+    "omg-unity-tof-sexy-card-shop",
+    "omg-unity-tof-social",
+    "omg-unity-tof-time",
+    "omg-unity-tof-up-coming-feature",
+    "omg-unity-tof-update-reward",
+    "omg-unity-tof-user-experience",
+    "omg-unity-tof-wallpaper-collection",
+    "omg-unity-tof-win-streak"
+  ],
+  "agents": [],
+  "detect": {
+    "files": [
+      "**/*.cs",
+      "**/package.json"
+    ],
+    "anyOf": [
+      {
+        "pattern": "TheOne\\.Features\\.|TheOneFeature\\.Core\\.|TheOneFeatureAdaptersVContainer",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-unity"
+}

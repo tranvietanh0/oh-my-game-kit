@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "com.unity.entities": "1.3.8",
+    "com.unity.burst": "1.8.18",
+    "com.unity.collections": "2.5.1",
+    "com.unity.mathematics": "1.3.2",
+    "com.unity.inputsystem": "1.11.2",
+    "com.the1studio.utils": "file:../local-packages/com.the1studio.utils"
+  },
+  "registry": "https://packages.unity.com",
+  "_origin": {
+    "kit": "oh-my-game-kit-unity",
+    "repository": "The1Studio/oh-my-game-kit-unity",
+    "module": "architecture",
+    "protected": false
+  }
+}

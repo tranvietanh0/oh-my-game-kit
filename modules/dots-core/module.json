@@ -1,0 +1,44 @@
+{
+  "name": "dots-core",
+  "version": "1.8.0",
+  "description": "DOTS/ECS fundamentals: entities, components, systems, jobs, burst, collections, serialization",
+  "required": false,
+  "dependencies": {
+    "base": ">=1.0.0"
+  },
+  "skills": [
+    "omg-unity-dots-core-ecs-core",
+    "omg-unity-dots-core-architecture",
+    "omg-unity-dots-core-jobs-burst",
+    "omg-unity-dots-core-subscene",
+    "omg-unity-dots-core-enableable-components",
+    "omg-unity-dots-core-entity-command-buffer",
+    "omg-unity-dots-core-performance",
+    "omg-unity-dots-core-zlinq",
+    "omg-unity-dots-core-zstring",
+    "omg-unity-dots-core-google-protobuf",
+    "omg-unity-dots-core-memorypack"
+  ],
+  "agents": [
+    "omg-unity-dots-core-debugger",
+    "omg-unity-dots-core-environment",
+    "omg-unity-dots-core-implementer",
+    "omg-unity-dots-core-optimizer",
+    "omg-unity-dots-core-reviewer",
+    "omg-unity-dots-core-shader",
+    "omg-unity-dots-core-tester",
+    "omg-unity-dots-core-validator"
+  ],
+  "detect": {
+    "files": [
+      "**/*.cs"
+    ],
+    "anyOf": [
+      {
+        "pattern": "IComponentData|ISystem|IJobEntity|EntityManager",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-unity"
+}

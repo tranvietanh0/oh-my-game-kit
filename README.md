@@ -63,6 +63,26 @@ npx --yes github:tranvietanh0/oh-my-game-kit install --target project --preset u
 npx --yes github:tranvietanh0/oh-my-game-kit uninstall --target global
 ```
 
+## GitHub Packages Usage
+
+Releases publish the scoped npm package `@tranvietanh0/oh-my-game-kit` to GitHub Packages.
+
+Configure npm for the GitHub Packages scope:
+
+```sh
+npm config set @tranvietanh0:registry https://npm.pkg.github.com
+```
+
+Then run or install the package:
+
+```sh
+npx --yes @tranvietanh0/oh-my-game-kit validate
+npm install --global @tranvietanh0/oh-my-game-kit
+omg-kit install --target global --fresh --preset full
+```
+
+Publishing is handled by the `Publish GitHub Package` GitHub Actions workflow when a release is published, and can also be started manually from GitHub Actions.
+
 ## Local Development
 
 ```sh

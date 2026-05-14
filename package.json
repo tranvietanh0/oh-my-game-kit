@@ -1,5 +1,5 @@
 {
-  "name": "oh-my-game-kit",
+  "name": "@tranvietanh0/oh-my-game-kit",
   "version": "0.1.0",
   "description": "Codex-native game development skills and workflows",
   "type": "module",
@@ -45,5 +45,8 @@
     "type": "git",
     "url": "git+https://github.com/tranvietanh0/oh-my-game-kit.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }

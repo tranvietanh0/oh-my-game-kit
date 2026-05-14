@@ -2,7 +2,7 @@
 
 Codex-native game-development skills, Unity workflows, and optional Codex agent templates.
 
-The kit installs `omg-*` skills into Codex skill roots and merges a small managed instruction block into `AGENTS.md`. For Unity projects, it includes skills for editor workflows, MCP tool usage, testing, rendering, UI, DOTS, mobile, audio, networking, and TOF gameplay systems.
+The kit installs `omg-*` skills into Codex skill roots and merges a small managed instruction block into `AGENTS.md`. For Unity projects, it includes skills for editor workflows, MCP tool usage, testing, rendering, UI, DOTS, mobile, audio, and networking.
 
 ## Requirements
 

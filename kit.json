@@ -25,7 +25,6 @@
     "networking",
     "rendering",
     "testing",
-    "tof",
     "ui"
   ],
   "presets": {
@@ -85,7 +84,6 @@
       "networking",
       "rendering",
       "testing",
-      "tof",
       "ui"
     ],
     "full": "*"

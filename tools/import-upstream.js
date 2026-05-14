@@ -14,6 +14,7 @@ const coreRoot = process.env.OMG_UPSTREAM_CORE ?? path.join(tempRoot, `${legacyP
 const unityRoot = process.env.OMG_UPSTREAM_UNITY ?? path.join(tempRoot, `${legacyPackage}-unity`);
 
 const generatedHeader = "Generated from upstream reference sources. Re-run `node tools/import-upstream.js` to refresh.";
+const excludedUnityModules = new Set(["tof"]);
 
 function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
@@ -288,6 +289,7 @@ function importUnity(modulesOut, agentsOut) {
 
   for (const sourceModuleName of fs.readdirSync(modulesDir)) {
     const moduleName = mapModuleName(sourceModuleName);
+    if (excludedUnityModules.has(moduleName)) continue;
     const srcModule = path.join(modulesDir, sourceModuleName);
     const moduleJsonPath = path.join(srcModule, "module.json");
     if (!fs.existsSync(moduleJsonPath)) continue;

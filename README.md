@@ -15,13 +15,13 @@ The kit installs `omg-*` skills into Codex skill roots and merges a small manage
 Windows PowerShell:
 
 ```powershell
-irm https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/main/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/release/scripts/install.ps1 | iex
 ```
 
 macOS/Linux:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/main/scripts/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/release/scripts/install.sh | sh
 ```
 
 By default this installs the `full` preset globally, refreshes managed Oh My Game Kit files, installs skills into both `~/.agents/skills` and `~/.codex/skills`, and installs optional Codex agents into `~/.codex/agents`.
@@ -29,11 +29,11 @@ By default this installs the `full` preset globally, refreshes managed Oh My Gam
 To install a smaller preset:
 
 ```powershell
-$env:OMG_PRESET = "unity-minimal"; irm https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/main/scripts/install.ps1 | iex
+$env:OMG_PRESET = "unity-minimal"; irm https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/release/scripts/install.ps1 | iex
 ```
 
 ```sh
-PRESET=unity-minimal curl -fsSL https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/main/scripts/install.sh | sh
+PRESET=unity-minimal curl -fsSL https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/release/scripts/install.sh | sh
 ```
 
 To install from another branch or fork:
@@ -51,16 +51,16 @@ OMG_REPO=YourOrg/oh-my-game-kit OMG_REF=feature-branch curl -fsSL https://raw.gi
 You can run the CLI directly from GitHub with `npx`:
 
 ```sh
-npx --yes github:tranvietanh0/oh-my-game-kit install --target global --fresh --preset full
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --fresh --preset full
 ```
 
 Useful commands:
 
 ```sh
-npx --yes github:tranvietanh0/oh-my-game-kit validate
-npx --yes github:tranvietanh0/oh-my-game-kit doctor --target global
-npx --yes github:tranvietanh0/oh-my-game-kit install --target project --preset unity-minimal
-npx --yes github:tranvietanh0/oh-my-game-kit uninstall --target global
+npx --yes github:tranvietanh0/oh-my-game-kit#release validate
+npx --yes github:tranvietanh0/oh-my-game-kit#release doctor --target global
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target project --preset unity-minimal
+npx --yes github:tranvietanh0/oh-my-game-kit#release uninstall --target global
 ```
 
 ## GitHub Packages Usage
@@ -101,9 +101,9 @@ omg-kit doctor --target global
 
 ### Publish a new package version
 
-Publishing is handled by the `Publish GitHub Package` GitHub Actions workflow when a GitHub Release is published, and can also be started manually from GitHub Actions.
+Publishing is handled by the `Publish GitHub Package` GitHub Actions workflow when the `release` branch is pushed, when a GitHub Release is published, or when the workflow is started manually.
 
-Before publishing again, update `package.json` to a new version and create a matching release tag, for example `v0.1.1`.
+Before publishing again, update `package.json` to a new version and create a matching release tag, for example `v0.1.1`. GitHub Packages will reject publishing the same package version twice.
 
 ## Local Development
 
@@ -146,23 +146,35 @@ Project install:
 
 Managed blocks are protected with Oh My Game Kit sentinels. User content outside those blocks is preserved.
 
-## Release Checklist
+## Release Workflow
 
-Before pushing a release tag:
+`main` is for development and validation. `release` is the public install and package-publish branch. Exact versions are represented by git tags such as `v0.1.1`, not by per-version release branches.
+
+Before publishing:
 
 ```sh
 npm run check
 npm pack --dry-run
 ```
 
-Then create and push a tag:
+Create a new version on `main`:
 
 ```sh
-git tag v0.1.0
+npm version patch
 git push origin main --tags
 ```
 
-Users can pin the tag:
+Promote that version to `release`:
+
+```sh
+git checkout release
+git merge main
+git push origin release
+```
+
+Pushing `release` runs CI and publishes `@tranvietanh0/oh-my-game-kit` to GitHub Packages. If the version already exists, the publish workflow fails with a clear version-bump error.
+
+Users can also pin an exact tag:
 
 ```sh
 npx --yes github:tranvietanh0/oh-my-game-kit#v0.1.0 install --target global --fresh --preset full

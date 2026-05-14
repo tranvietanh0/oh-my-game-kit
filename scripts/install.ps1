@@ -11,7 +11,7 @@ param(
 $ErrorActionPreference = "Stop"
 
 if (-not $Repo) { $Repo = "tranvietanh0/oh-my-game-kit" }
-if (-not $Ref) { $Ref = "main" }
+if (-not $Ref) { $Ref = "release" }
 if (-not $Preset) { $Preset = "full" }
 
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) {

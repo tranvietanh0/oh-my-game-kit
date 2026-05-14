@@ -2,7 +2,7 @@
 set -eu
 
 REPO="${OMG_REPO:-tranvietanh0/oh-my-game-kit}"
-REF="${OMG_REF:-main}"
+REF="${OMG_REF:-release}"
 TARGET="${TARGET:-global}"
 PRESET="${OMG_PRESET:-${PRESET:-full}}"
 FRESH="${OMG_FRESH:-1}"

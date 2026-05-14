@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Codex-native game development skills and workflows",
   "type": "module",
+  "private": false,
   "bin": {
     "omg-kit": "src/cli.js"
   },
@@ -10,10 +11,39 @@
     "validate": "node src/cli.js validate",
     "doctor": "node src/cli.js doctor",
     "test": "node tests/smoke.test.js",
-    "install:local": "node src/cli.js install --target global --fresh --preset unity-minimal"
+    "check:namespace": "node tools/check-namespace.js",
+    "check": "npm run validate && npm test && npm run check:namespace",
+    "install:local": "node src/cli.js install --target global --fresh --preset unity-minimal",
+    "pack:dry-run": "npm pack --dry-run",
+    "prepack": "npm run check"
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "LICENSE",
+    "agents/",
+    "kit.json",
+    "modules/",
+    "scripts/",
+    "src/"
+  ],
+  "keywords": [
+    "codex",
+    "skills",
+    "unity",
+    "game-development",
+    "mcp"
+  ],
+  "homepage": "https://github.com/tranvietanh0/oh-my-game-kit#readme",
+  "bugs": {
+    "url": "https://github.com/tranvietanh0/oh-my-game-kit/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tranvietanh0/oh-my-game-kit.git"
   },
   "license": "MIT"
 }

@@ -1,6 +1,6 @@
 # Generated from upstream reference sources. Re-run `node tools/import-upstream.js` to refresh.
 # source = "unity:dots-core:omg-unity-dots-core-reviewer"
-description = "|"
+description = "You are a Unity DOTS code review specialist focused on correctness, performance, and architectural quality."
 
 developer_instructions = """
 You are a Unity DOTS code review specialist focused on correctness, performance, and architectural quality.

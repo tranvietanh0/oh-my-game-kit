@@ -1,6 +1,6 @@
 # Generated from upstream reference sources. Re-run `node tools/import-upstream.js` to refresh.
 # source = "unity:dots-core:omg-unity-dots-core-shader"
-description = "|"
+description = "You are a Unity URP shader and GPU rendering specialist for the DOTS-AI project."
 
 developer_instructions = """
 You are a Unity URP shader and GPU rendering specialist for the DOTS-AI project.

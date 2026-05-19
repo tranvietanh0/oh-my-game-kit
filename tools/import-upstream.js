@@ -163,6 +163,34 @@ function yamlString(value) {
   return JSON.stringify(String(value ?? "").replace(/\s+/g, " ").trim());
 }
 
+function cleanInlineDescription(value) {
+  return mapText(value)
+    .replace(/[`*_#>\[\]()]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function trimDescription(value, fallback) {
+  const text = cleanInlineDescription(value);
+  if (!text) return fallback;
+  if (text.length <= 280) return text;
+  const sentence = text.slice(0, 280).match(/^(.+?[.!?])\s/);
+  if (sentence?.[1] && sentence[1].length >= 80) return sentence[1];
+  return `${text.slice(0, 277).trimEnd()}...`;
+}
+
+function agentDescriptionFromBody(body, sourceName) {
+  const mappedName = mapName(sourceName);
+  for (const paragraph of mapText(body).split(/\r?\n\s*\r?\n/)) {
+    const cleaned = cleanInlineDescription(paragraph);
+    if (!cleaned) continue;
+    if (/^mandatory\b/i.test(cleaned)) continue;
+    if (/^tools?\b/i.test(cleaned)) continue;
+    return trimDescription(cleaned, `Use this ${mappedName} agent for delegated Oh My Game Kit work.`);
+  }
+  return `Use this ${mappedName} agent for delegated Oh My Game Kit work.`;
+}
+
 function convertSkillDir(srcDir, dstDir, targetName, origin) {
   copyDir(srcDir, dstDir);
   normalizeTreeNames(dstDir);
@@ -206,7 +234,11 @@ function convertAgent(srcFile, dstFile, sourceName, origin) {
   const raw = fs.readFileSync(srcFile, "utf8");
   const { frontmatter, body } = stripFrontmatter(raw);
   const name = mapName(sourceName);
-  const description = mapText(frontmatter.description || frontmatter.name || sourceName);
+  const frontmatterDescription = cleanInlineDescription(frontmatter.description);
+  const description =
+    !frontmatterDescription || ["|", "|-", "|+", ">", ">-", ">+"].includes(frontmatterDescription)
+      ? agentDescriptionFromBody(body, sourceName)
+      : trimDescription(frontmatterDescription, agentDescriptionFromBody(body, sourceName));
   const instructions = mapText(body).trim();
   const toml = [
     `# ${generatedHeader}`,

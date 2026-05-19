@@ -1,6 +1,6 @@
 # Generated from upstream reference sources. Re-run `node tools/import-upstream.js` to refresh.
 # source = "core:omg-mcp-manager"
-description = "|"
+description = "OMG MCP Manager Subagent"
 
 developer_instructions = """
 # OMG MCP Manager Subagent

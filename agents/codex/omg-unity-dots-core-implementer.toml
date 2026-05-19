@@ -1,6 +1,6 @@
 # Generated from upstream reference sources. Re-run `node tools/import-upstream.js` to refresh.
 # source = "unity:dots-core:omg-unity-dots-core-implementer"
-description = "|"
+description = "You are a Unity DOTS ECS implementation specialist for the dots-rpg reusable library."
 
 developer_instructions = """
 You are a Unity DOTS ECS implementation specialist for the dots-rpg reusable library.

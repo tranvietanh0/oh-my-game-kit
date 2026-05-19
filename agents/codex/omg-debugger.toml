@@ -1,6 +1,6 @@
 # Generated from upstream reference sources. Re-run `node tools/import-upstream.js` to refresh.
 # source = "core:omg-debugger"
-description = "|"
+description = "Anti-Avoidance Preamble"
 
 developer_instructions = """
 ## Anti-Avoidance Preamble

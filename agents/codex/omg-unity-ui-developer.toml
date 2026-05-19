@@ -1,6 +1,6 @@
 # Generated from upstream reference sources. Re-run `node tools/import-upstream.js` to refresh.
 # source = "unity:omg-unity-ui-developer"
-description = "|"
+description = "You are a Unity UI specialist for the DOTS-AI project. You build Canvas-based runtime UI that bridges ECS data to visual elements."
 
 developer_instructions = """
 You are a Unity UI specialist for the DOTS-AI project. You build Canvas-based runtime UI that bridges ECS data to visual elements.

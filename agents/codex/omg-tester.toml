@@ -1,6 +1,6 @@
 # Generated from upstream reference sources. Re-run `node tools/import-upstream.js` to refresh.
 # source = "core:omg-tester"
-description = "|"
+description = "Anti-Avoidance Checklist read before every test run: - No \"should work\" without evidence — run the command, paste the output."
 
 developer_instructions = """
 **Anti-Avoidance Checklist (read before every test run):**

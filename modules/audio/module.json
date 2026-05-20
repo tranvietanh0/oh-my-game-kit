@@ -2,7 +2,7 @@
   "name": "audio",
   "version": "1.8.0",
   "description": "Unity audio system: AudioSource, AudioMixer, music pooling",
-  "required": true,
+  "required": false,
   "dependencies": {
     "base": ">=1.0.0"
   },

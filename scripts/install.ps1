@@ -3,6 +3,7 @@ param(
   [string]$Ref = $env:OMG_REF,
   [string]$Target = "global",
   [string]$Preset = $env:OMG_PRESET,
+  [string]$Engine = $env:OMG_ENGINE,
   [switch]$Fresh,
   [switch]$Force,
   [switch]$NoAgents
@@ -12,7 +13,36 @@ $ErrorActionPreference = "Stop"
 
 if (-not $Repo) { $Repo = "tranvietanh0/oh-my-game-kit" }
 if (-not $Ref) { $Ref = "release" }
-if (-not $Preset) { $Preset = "full" }
+
+function Resolve-EnginePreset {
+  param([string]$SelectedEngine)
+  switch ($SelectedEngine.ToLowerInvariant()) {
+    "unity" { return "unity-production" }
+    "cocos" { return "cocos-playable" }
+    "all" { return "full" }
+    default { throw "Unknown OMG_ENGINE '$SelectedEngine'. Use unity, cocos, or all." }
+  }
+}
+
+if (-not $Preset) {
+  if (-not $Engine) {
+    if (-not [Environment]::UserInteractive) {
+      throw "Set OMG_ENGINE=unity, OMG_ENGINE=cocos, or OMG_ENGINE=all for non-interactive installs."
+    }
+    Write-Host "Choose Oh My Game Kit engine:"
+    Write-Host "  1) Unity"
+    Write-Host "  2) Cocos"
+    Write-Host "  3) Both"
+    $Choice = Read-Host "Engine [1-3]"
+    switch ($Choice) {
+      "1" { $Engine = "unity" }
+      "2" { $Engine = "cocos" }
+      "3" { $Engine = "all" }
+      default { throw "Invalid engine choice '$Choice'. Use 1, 2, or 3." }
+    }
+  }
+  $Preset = Resolve-EnginePreset $Engine
+}
 
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
   throw "Node.js 20+ is required. Install Node.js, then run this installer again."

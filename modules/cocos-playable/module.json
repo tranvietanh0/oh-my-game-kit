@@ -1,0 +1,65 @@
+{
+  "name": "cocos-playable",
+  "version": "0.3.0",
+  "description": "Playable-ad runtime: FSM, lifecycle, signal bus, layout, transitions, SDK glue, and all ad-network deliverables.",
+  "required": false,
+  "dependencies": {
+    "cocos-base": ">=1.6.0"
+  },
+  "skills": [
+    "omg-cocos-playable-lifecycle",
+    "omg-cocos-playable-signalbus",
+    "omg-cocos-playable-parameter",
+    "omg-cocos-playable-fsm",
+    "omg-cocos-playable-object-pool",
+    "omg-cocos-playable-async-utilities",
+    "omg-cocos-playable-utilities",
+    "omg-cocos-playable-animation-core",
+    "omg-cocos-playable-animation-presets",
+    "omg-cocos-playable-juice",
+    "omg-cocos-playable-gameflow",
+    "omg-cocos-playable-input-service",
+    "omg-cocos-playable-transitions",
+    "omg-cocos-playable-score",
+    "omg-cocos-playable-progression",
+    "omg-cocos-playable-sdk-core",
+    "omg-cocos-playable-build-size",
+    "omg-cocos-playable-asset-management",
+    "omg-cocos-playable-editor-tools",
+    "omg-cocos-playable-layout",
+    "omg-cocos-playable-toast",
+    "omg-cocos-playable-font-service",
+    "omg-cocos-playable-tutorials",
+    "omg-cocos-playable-extract"
+  ],
+  "agents": [
+    "omg-cocos-playable-extractor"
+  ],
+  "detect": {
+    "files": [
+      "**/*.ts",
+      "**/*.js",
+      "**/*.html",
+      "**/assets/**/*.scene"
+    ],
+    "anyOf": [
+      {
+        "pattern": "sp\\.Skeleton|spine\\.Skeleton|AnimationClip|AnimationState",
+        "minHits": 2
+      },
+      {
+        "pattern": "director\\.|Director\\.scene|cc\\.director|cc\\.game|sys\\.localStorage",
+        "minHits": 2
+      },
+      {
+        "pattern": "mraid|getMRAIDEnv|window\\.mraid|FbPlayableAd|playableSDK",
+        "minHits": 2
+      },
+      {
+        "pattern": "cc\\.Label|cc\\.Sprite|UITransform|cc\\.Layout|ScrollView|cc\\.Widget",
+        "minHits": 2
+      }
+    ]
+  },
+  "source": "upstream-cocos"
+}

@@ -11,6 +11,11 @@ const MANAGED_START = "<!-- oh-my-game-kit:start -->";
 const MANAGED_END = "<!-- oh-my-game-kit:end -->";
 const CODEX_CONFIG_START = "# oh-my-game-kit agents:start";
 const CODEX_CONFIG_END = "# oh-my-game-kit agents:end";
+const ENGINE_PRESETS = {
+  unity: "unity-production",
+  cocos: "cocos-playable",
+  all: "full",
+};
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -140,10 +145,54 @@ function modulesFromPreset(presetName, kit, modules) {
   return preset;
 }
 
-function resolveRequestedModules(args, kit, modules) {
-  if (args.modules) return String(args.modules).split(",").map((s) => s.trim()).filter(Boolean);
-  if (args.preset) return modulesFromPreset(String(args.preset), kit, modules);
-  return modulesFromPreset("unity-minimal", kit, modules);
+function inferEngineFromPreset(presetName) {
+  if (!presetName) return "custom";
+  if (presetName === "full") return "all";
+  if (presetName.startsWith("cocos-")) return "cocos";
+  if (presetName.startsWith("unity-")) return "unity";
+  return "custom";
+}
+
+function validateEngine(engine) {
+  if (!Object.hasOwn(ENGINE_PRESETS, engine)) {
+    throw new Error(`Unknown engine "${engine}". Use unity, cocos, or all.`);
+  }
+}
+
+function resolveInstallSelection(args, kit, modules) {
+  if (args.modules) {
+    return {
+      engine: "custom",
+      preset: "custom",
+      requested: String(args.modules).split(",").map((s) => s.trim()).filter(Boolean),
+    };
+  }
+
+  if (args.preset) {
+    const preset = String(args.preset);
+    return {
+      engine: inferEngineFromPreset(preset),
+      preset,
+      requested: modulesFromPreset(preset, kit, modules),
+    };
+  }
+
+  if (args.engine) {
+    const engine = String(args.engine).toLowerCase();
+    validateEngine(engine);
+    const preset = ENGINE_PRESETS[engine];
+    return {
+      engine,
+      preset,
+      requested: modulesFromPreset(preset, kit, modules),
+    };
+  }
+
+  return {
+    engine: "unity",
+    preset: "unity-minimal",
+    requested: modulesFromPreset("unity-minimal", kit, modules),
+  };
 }
 
 function parseSkillFrontmatter(content) {
@@ -257,13 +306,23 @@ function removeManagedTomlBlock(content) {
 }
 
 function buildManagedBlock(moduleNames, targetKind) {
+  const guidance = [
+    "Codex should use installed `omg-*` skills for game-development work.",
+  ];
+  if (moduleNames.some((name) => name === "base" || name.startsWith("dots-") || ["animation", "architecture", "audio", "editor", "mobile", "networking", "rendering", "testing", "ui"].includes(name))) {
+    guidance.push("For Unity work, prefer the Unity MCP workflow when MCP tools are available. After Unity C# script edits, refresh scripts and read console errors before reporting success.");
+  }
+  if (moduleNames.some((name) => name.startsWith("cocos-"))) {
+    guidance.push("For Cocos work, use installed `omg-cocos-*` skills for Cocos Creator and playable-ad workflows.");
+  }
+
   return `${MANAGED_START}
 ## Oh My Game Kit
 
 Installed target: ${targetKind}
 Installed modules: ${moduleNames.join(", ")}
 
-Codex should use installed \`omg-*\` skills for game-development work. For Unity work, prefer the Unity MCP workflow when MCP tools are available. After Unity C# script edits, refresh scripts and read console errors before reporting success.
+${guidance.join("\n")}
 ${MANAGED_END}
 `;
 }
@@ -351,8 +410,8 @@ function install(args) {
   }
 
   const { kit, modules } = loadKit();
-  const requested = resolveRequestedModules(args, kit, modules);
-  const moduleNames = resolveModules(requested, kit, modules);
+  const selection = resolveInstallSelection(args, kit, modules);
+  const moduleNames = resolveModules(selection.requested, kit, modules);
   const target = resolveTarget(args);
 
   if (args.fresh) removeOldSetup(target);
@@ -424,6 +483,8 @@ function install(args) {
     agentsMd: target.agentsMd,
     codexAgentsDir: target.codexAgentsDir,
     codexConfig: target.codexConfig,
+    engine: selection.engine,
+    preset: selection.preset,
     modules: Object.fromEntries(moduleNames.map((name) => [name, modules.get(name).version])),
     files: stateFiles,
   };
@@ -431,6 +492,9 @@ function install(args) {
 
   return {
     moduleNames,
+    engine: selection.engine,
+    preset: selection.preset,
+    kitVersion: kit.version,
     target,
     skillsInstalled: stateFiles.filter((f) => f.target.endsWith("SKILL.md")).length,
     agentsInstalled: installedAgents.length,
@@ -454,6 +518,8 @@ function doctor(args) {
   if (fs.existsSync(statePath)) {
     const state = readJson(statePath);
     lines.push(`Installed version: ${state.version}`);
+    lines.push(`Installed engine: ${state.engine ?? "unknown"}`);
+    lines.push(`Installed preset: ${state.preset ?? "unknown"}`);
     lines.push(`Installed modules: ${Object.keys(state.modules ?? {}).join(", ")}`);
     let drift = 0;
     for (const file of state.files ?? []) {
@@ -482,10 +548,10 @@ function printHelp() {
 Usage:
   node src/cli.js validate
   node src/cli.js doctor [--target project|global]
-  node src/cli.js install [--target project|global] [--preset unity-minimal] [--modules a,b] [--fresh] [--force] [--no-agents]
+  node src/cli.js install [--target project|global] [--engine unity|cocos|all] [--preset unity-minimal] [--modules a,b] [--fresh] [--force] [--no-agents]
   node src/cli.js uninstall [--target project|global]
 
-Default install target is global. Global installs to both ~/.agents/skills and ~/.codex/skills unless --skills-root is provided. Codex agents are installed to .codex/agents unless --no-agents is passed.
+Default install target is global. Without --engine, --preset, or --modules, install keeps the legacy unity-minimal fallback. --modules overrides --preset and --engine; --preset overrides --engine. Global installs to both ~/.agents/skills and ~/.codex/skills unless --skills-root is provided. Codex agents are installed to .codex/agents unless --no-agents is passed.
 `);
 }
 
@@ -516,7 +582,9 @@ function main() {
     if (command === "install") {
       const result = install(args);
       for (const warning of result.warnings) console.warn(`warning: ${warning}`);
-      console.log(`installed ${KIT_NAME}@0.1.0 to ${result.target.kind}`);
+      console.log(`installed ${KIT_NAME}@${result.kitVersion} to ${result.target.kind}`);
+      console.log(`engine: ${result.engine}`);
+      console.log(`preset: ${result.preset}`);
       console.log(`modules: ${result.moduleNames.join(", ")}`);
       console.log(`skills roots: ${result.target.skillsRoots.join("; ")}`);
       console.log(`agents installed: ${result.agentsInstalled}`);

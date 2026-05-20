@@ -1,11 +1,12 @@
 {
   "name": "oh-my-game-kit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "provider": "codex",
-  "description": "Codex-native Oh My Game Kit core and Unity game-development workflows.",
+  "description": "Codex-native Oh My Game Kit core, Unity, and Cocos game-development workflows.",
   "generatedFrom": {
     "core": "upstream-core-reference",
-    "unity": "upstream-unity-reference"
+    "unity": "upstream-unity-reference",
+    "cocos": "upstream-cocos-reference"
   },
   "modules": [
     "omg-base",
@@ -25,7 +26,9 @@
     "networking",
     "rendering",
     "testing",
-    "ui"
+    "ui",
+    "cocos-base",
+    "cocos-playable"
   ],
   "presets": {
     "core": [
@@ -85,6 +88,23 @@
       "rendering",
       "testing",
       "ui"
+    ],
+    "cocos-minimal": [
+      "omg-base",
+      "omg-extended",
+      "cocos-base"
+    ],
+    "cocos-playable": [
+      "omg-base",
+      "omg-extended",
+      "cocos-base",
+      "cocos-playable"
+    ],
+    "cocos-full": [
+      "omg-base",
+      "omg-extended",
+      "cocos-base",
+      "cocos-playable"
     ],
     "full": "*"
   }

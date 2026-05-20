@@ -1,6 +1,6 @@
 {
   "name": "@tranvietanh0/oh-my-game-kit",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Codex-native game development skills and workflows",
   "type": "module",
   "private": false,
@@ -13,7 +13,7 @@
     "test": "node tests/smoke.test.js",
     "check:namespace": "node tools/check-namespace.js",
     "check": "npm run validate && npm test && npm run check:namespace",
-    "install:local": "node src/cli.js install --target global --fresh --preset unity-minimal",
+    "install:local": "node src/cli.js install --target global --fresh --engine unity",
     "pack:dry-run": "npm pack --dry-run",
     "prepack": "npm run check"
   },
@@ -34,6 +34,7 @@
     "codex",
     "skills",
     "unity",
+    "cocos",
     "game-development",
     "mcp"
   ],

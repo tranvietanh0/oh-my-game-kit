@@ -1,0 +1,33 @@
+{
+  "__type__": "cc.Prefab",
+  "_name": "BulletPrefab",
+  "_children": [
+    {
+      "__type__": "cc.Node",
+      "_name": "Bullet",
+      "_components": [
+        {
+          "__type__": "Bullet",
+          "ctor": "Bullet",
+          "properties": {
+            "trailEffect": {
+              "__uuid__": "ffeeddcc-0001"
+            }
+          }
+        },
+        {
+          "__type__": "cc.Collider2D",
+          "ctor": "Collider2D",
+          "properties": {}
+        }
+      ],
+      "_children": []
+    }
+  ],
+  "_origin": {
+    "kit": "oh-my-game-kit-cocos",
+    "repository": "The1Studio/oh-my-game-kit-cocos",
+    "module": "base",
+    "protected": false
+  }
+}

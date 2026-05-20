@@ -2,7 +2,7 @@
   "name": "animation",
   "version": "1.8.0",
   "description": "Animation systems: Mecanim, Playables, Timeline, LitMotion tweening",
-  "required": true,
+  "required": false,
   "dependencies": {
     "base": ">=1.0.0"
   },

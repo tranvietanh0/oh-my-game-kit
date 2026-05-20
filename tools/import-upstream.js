@@ -12,6 +12,7 @@ const legacyTitle = ["The", "One", "Kit"].join("");
 const legacyUpper = legacyToken.toUpperCase();
 const coreRoot = process.env.OMG_UPSTREAM_CORE ?? path.join(tempRoot, `${legacyPackage}-core`);
 const unityRoot = process.env.OMG_UPSTREAM_UNITY ?? path.join(tempRoot, `${legacyPackage}-unity`);
+const cocosRoot = process.env.OMG_UPSTREAM_COCOS ?? path.join(tempRoot, `${legacyPackage}-cocos`);
 
 const generatedHeader = "Generated from upstream reference sources. Re-run `node tools/import-upstream.js` to refresh.";
 const excludedUnityModules = new Set(["tof"]);
@@ -85,6 +86,14 @@ function mapModuleName(name) {
     .replace(/[^a-z0-9-]+/g, "-")
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+function mapCocosModuleName(name) {
+  const local = String(name).includes(":") ? String(name).split(":").pop() : String(name);
+  const mapped = mapModuleName(local);
+  if (mapped === "base") return "cocos-base";
+  if (mapped === "playable") return "cocos-playable";
+  return mapped;
 }
 
 function mapText(text) {
@@ -255,11 +264,11 @@ function convertAgent(srcFile, dstFile, sourceName, origin) {
   return { name, description };
 }
 
-function normalizeDeps(deps) {
+function normalizeDeps(deps, moduleNameMapper = mapModuleName) {
   const result = {};
   for (const [name, version] of Object.entries(deps ?? {})) {
     const local = name.includes(":") ? name.split(":").pop() : name;
-    result[mapModuleName(local)] = version;
+    result[moduleNameMapper(local)] = version;
   }
   return result;
 }
@@ -354,7 +363,7 @@ function importUnity(modulesOut, agentsOut) {
       name: moduleName,
       version: manifest.version ?? "0.1.0",
       description: mapText(manifest.description ?? moduleName),
-      required: manifest.required ?? false,
+      required: false,
       dependencies: normalizeDeps(manifest.dependencies),
       skills: mappedSkills,
       agents: mappedAgents,
@@ -374,8 +383,70 @@ function importUnity(modulesOut, agentsOut) {
   return { modules: imported, agents };
 }
 
+function importCocos(modulesOut, agentsOut) {
+  const modulesDir = path.join(cocosRoot, ".claude", "modules");
+  const rootAgents = path.join(cocosRoot, ".claude", "agents");
+  const imported = [];
+  const agents = [];
+
+  for (const sourceModuleName of fs.readdirSync(modulesDir)) {
+    const moduleName = mapCocosModuleName(sourceModuleName);
+    const srcModule = path.join(modulesDir, sourceModuleName);
+    const moduleJsonPath = path.join(srcModule, "module.json");
+    if (!fs.existsSync(moduleJsonPath)) continue;
+    const manifest = readJson(moduleJsonPath);
+    const dstModule = path.join(modulesOut, moduleName);
+    const mappedSkills = [];
+    const mappedAgents = [];
+
+    for (const skill of manifest.skills ?? []) {
+      const srcSkill = path.join(srcModule, "skills", skill);
+      if (!fs.existsSync(srcSkill)) continue;
+      const mapped = mapName(skill);
+      convertSkillDir(srcSkill, path.join(dstModule, "skills", mapped), mapped, `cocos:${moduleName}:${skill}`);
+      mappedSkills.push(mapped);
+    }
+
+    for (const agent of manifest.agents ?? []) {
+      const srcAgent =
+        fs.existsSync(path.join(srcModule, "agents", `${agent}.md`))
+          ? path.join(srcModule, "agents", `${agent}.md`)
+          : path.join(rootAgents, `${agent}.md`);
+      if (!fs.existsSync(srcAgent)) continue;
+      const mapped = mapName(agent);
+      const info = convertAgent(srcAgent, path.join(agentsOut, `${mapped}.toml`), agent, `cocos:${moduleName}:${agent}`);
+      mappedAgents.push(mapped);
+      agents.push(info);
+    }
+
+    writeJson(path.join(dstModule, "module.json"), {
+      name: moduleName,
+      version: manifest.version ?? "0.1.0",
+      description: mapText(manifest.description ?? moduleName),
+      required: false,
+      dependencies: normalizeDeps(manifest.dependencies, mapCocosModuleName),
+      skills: mappedSkills,
+      agents: mappedAgents,
+      detect: manifest.detect,
+      source: "upstream-cocos",
+    });
+    imported.push(moduleName);
+  }
+
+  if (fs.existsSync(rootAgents)) {
+    for (const file of fs.readdirSync(rootAgents).filter((f) => f.endsWith(".md"))) {
+      const name = file.replace(/\.md$/, "");
+      const mapped = mapName(name);
+      if (fs.existsSync(path.join(agentsOut, `${mapped}.toml`))) continue;
+      agents.push(convertAgent(path.join(rootAgents, file), path.join(agentsOut, `${mapped}.toml`), name, `cocos:${name}`));
+    }
+  }
+
+  return { modules: imported, agents };
+}
+
 function main() {
-  for (const required of [coreRoot, unityRoot]) {
+  for (const required of [coreRoot, unityRoot, cocosRoot]) {
     if (!fs.existsSync(required)) {
       throw new Error(`Missing source repo: ${required}`);
     }
@@ -390,16 +461,18 @@ function main() {
 
   const core = importCore(modulesOut, agentsOut);
   const unity = importUnity(modulesOut, agentsOut);
-  const moduleNames = [...core.modules, ...unity.modules];
+  const cocos = importCocos(modulesOut, agentsOut);
+  const moduleNames = [...core.modules, ...unity.modules, ...cocos.modules];
 
   writeJson(path.join(repoRoot, "kit.json"), {
     name: "oh-my-game-kit",
-    version: "0.1.0",
+    version: "0.2.0",
     provider: "codex",
-    description: "Codex-native Oh My Game Kit core and Unity game-development workflows.",
+    description: "Codex-native Oh My Game Kit core, Unity, and Cocos game-development workflows.",
     generatedFrom: {
       core: "upstream-core-reference",
       unity: "upstream-unity-reference",
+      cocos: "upstream-cocos-reference",
     },
     modules: moduleNames,
     presets: {
@@ -409,11 +482,14 @@ function main() {
       "unity-production": ["omg-base", "omg-extended", "base", "editor", "testing", "ui", "rendering", "animation", "audio", "mobile"],
       "unity-dots": ["omg-base", "omg-extended", "base", "editor", "testing", "dots-core", "dots-combat", "dots-nav", "dots-ai", "ui", "rendering"],
       "unity-full": ["omg-base", "omg-extended", ...unity.modules],
+      "cocos-minimal": ["omg-base", "omg-extended", "cocos-base"],
+      "cocos-playable": ["omg-base", "omg-extended", "cocos-base", "cocos-playable"],
+      "cocos-full": ["omg-base", "omg-extended", "cocos-base", "cocos-playable"],
       "full": "*",
     },
   });
 
-  console.log(`Imported ${core.modules.length} core modules, ${unity.modules.length} unity modules.`);
+  console.log(`Imported ${core.modules.length} core modules, ${unity.modules.length} unity modules, ${cocos.modules.length} cocos modules.`);
   console.log(`Imported ${walk(modulesOut).filter((f) => path.basename(f) === "SKILL.md").length} skills.`);
   console.log(`Imported ${walk(agentsOut).filter((f) => f.endsWith(".toml")).length} Codex agents.`);
 }

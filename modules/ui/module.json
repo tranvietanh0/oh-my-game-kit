@@ -2,7 +2,7 @@
   "name": "ui",
   "version": "1.8.0",
   "description": "UI systems: UGUI, UI Toolkit, mobile-responsive layouts",
-  "required": true,
+  "required": false,
   "dependencies": {
     "base": ">=1.0.0"
   },

@@ -1,0 +1,19 @@
+{
+  "name": "@omg/cocos-playable-extract",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Skill-local deps for omg-cocos-playable-extract reverse-engineering scripts",
+  "main": "scripts/fetch-bundle.cjs",
+  "scripts": {
+    "fetch": "node scripts/fetch-bundle.cjs",
+    "unpack": "node scripts/unpack-bundle.cjs",
+    "test": "node --test tests/"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "js-beautify": "^1.15.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -2,7 +2,7 @@
   "name": "base",
   "version": "1.9.0",
   "description": "Core Unity skills: conventions, MonoBehaviour, scene management, input, addressables, save/load, localization, MCP tooling",
-  "required": true,
+  "required": false,
   "dependencies": {},
   "skills": [
     "omg-unity-base-code-conventions",

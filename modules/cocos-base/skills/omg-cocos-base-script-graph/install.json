@@ -1,0 +1,46 @@
+{
+  "$schema": "https://the1studio.github.io/omg/adapter-install.schema.json",
+  "contractVersion": "1.0.0",
+  "engine": "cocos",
+  "requires": [
+    "mermaid-cli"
+  ],
+  "optionalTools": [
+    "graphviz"
+  ],
+  "prerequisites": [
+    {
+      "name": "Node.js",
+      "check": "node --version",
+      "minVersion": "18.0.0",
+      "installHintUrl": "https://nodejs.org/"
+    }
+  ],
+  "installSteps": [],
+  "perProject": [
+    {
+      "name": "ts-morph",
+      "method": "npm",
+      "handler": "npm-dev",
+      "package": "ts-morph",
+      "version": "^21.0.0",
+      "verify": "node -e \"require('ts-morph')\"",
+      "installHint": "npm i --save-dev ts-morph"
+    },
+    {
+      "name": "dependency-cruiser",
+      "method": "npm",
+      "handler": "npm-dev",
+      "package": "dependency-cruiser",
+      "version": "^16.0.0",
+      "verify": "npx --no-install depcruise --version",
+      "installHint": "npm i --save-dev dependency-cruiser"
+    }
+  ],
+  "_origin": {
+    "kit": "oh-my-game-kit-cocos",
+    "repository": "The1Studio/oh-my-game-kit-cocos",
+    "module": "base",
+    "protected": false
+  }
+}

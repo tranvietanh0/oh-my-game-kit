@@ -1,8 +1,8 @@
 # Oh My Game Kit
 
-Codex-native game-development skills, Unity workflows, and optional Codex agent templates.
+Codex-native game-development skills, Unity and Cocos workflows, and optional Codex agent templates.
 
-The kit installs `omg-*` skills into Codex skill roots and merges a small managed instruction block into `AGENTS.md`. For Unity projects, it includes skills for editor workflows, MCP tool usage, testing, rendering, UI, DOTS, mobile, audio, and networking.
+The kit installs `omg-*` skills into Codex skill roots and merges a small managed instruction block into `AGENTS.md`. For Unity projects, it includes skills for editor workflows, MCP tool usage, testing, rendering, UI, DOTS, mobile, audio, and networking. For Cocos projects, it includes Cocos Creator and playable-ad workflows ported as `omg-cocos-*` skills.
 
 ## Requirements
 
@@ -24,7 +24,25 @@ macOS/Linux:
 curl -fsSL https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/release/scripts/install.sh | sh
 ```
 
-By default this installs the `full` preset globally, refreshes managed Oh My Game Kit files, installs skills into both `~/.agents/skills` and `~/.codex/skills`, and installs optional Codex agents into `~/.codex/agents`.
+The one-line installer asks which engine to install when `OMG_ENGINE` is not set:
+
+- `Unity`: installs the `unity-production` preset.
+- `Cocos`: installs the `cocos-playable` preset.
+- `Both`: installs the `full` preset.
+
+It installs globally, refreshes managed Oh My Game Kit files, installs skills into both `~/.agents/skills` and `~/.codex/skills`, and installs optional Codex agents into `~/.codex/agents`.
+
+For non-interactive installs, set `OMG_ENGINE`:
+
+```powershell
+$env:OMG_ENGINE = "all"; irm https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/release/scripts/install.ps1 | iex
+```
+
+```sh
+OMG_ENGINE=cocos curl -fsSL https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/release/scripts/install.sh | sh
+```
+
+Engine values are `unity`, `cocos`, or `all`.
 
 To install a smaller preset:
 
@@ -59,8 +77,16 @@ Useful commands:
 ```sh
 npx --yes github:tranvietanh0/oh-my-game-kit#release validate
 npx --yes github:tranvietanh0/oh-my-game-kit#release doctor --target global
-npx --yes github:tranvietanh0/oh-my-game-kit#release install --target project --preset unity-minimal
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target project --engine cocos
 npx --yes github:tranvietanh0/oh-my-game-kit#release uninstall --target global
+```
+
+Engine shortcuts:
+
+```sh
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --engine unity
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --engine cocos
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --engine all
 ```
 
 ## GitHub Packages Usage
@@ -88,14 +114,15 @@ Run the CLI without installing globally:
 ```sh
 npx --yes @tranvietanh0/oh-my-game-kit validate
 npx --yes @tranvietanh0/oh-my-game-kit doctor --target global
-npx --yes @tranvietanh0/oh-my-game-kit install --target project --preset unity-minimal
+npx --yes @tranvietanh0/oh-my-game-kit install --target project --engine cocos
 ```
 
 Or install it globally once:
 
 ```sh
 npm install --global @tranvietanh0/oh-my-game-kit
-omg-kit install --target global --fresh --preset full
+omg-kit install --target global --fresh --engine all
+omg-kit install --target global --engine cocos
 omg-kit doctor --target global
 ```
 
@@ -112,6 +139,7 @@ git clone https://github.com/tranvietanh0/oh-my-game-kit.git
 cd oh-my-game-kit
 npm run check
 node src/cli.js install --target global --fresh --preset full
+node src/cli.js install --target global --fresh --engine cocos
 node src/cli.js doctor --target global
 ```
 
@@ -123,6 +151,9 @@ node src/cli.js doctor --target global
 - `unity-production`: Unity base, editor, testing, UI, rendering, animation, audio, and mobile
 - `unity-dots`: Unity base plus DOTS architecture, combat, navigation, AI, rendering, and testing
 - `unity-full`: all Unity modules
+- `cocos-minimal`: core plus Cocos script-graph workflow
+- `cocos-playable`: Cocos Creator playable-ad workflows
+- `cocos-full`: all Cocos modules
 - `full`: all modules and all optional Codex agents
 
 ## Installed Locations
@@ -177,5 +208,5 @@ Pushing `release` runs CI and publishes `@tranvietanh0/oh-my-game-kit` to GitHub
 Users can also pin an exact tag:
 
 ```sh
-npx --yes github:tranvietanh0/oh-my-game-kit#v0.1.0 install --target global --fresh --preset full
+npx --yes github:tranvietanh0/oh-my-game-kit#v0.2.0 install --target global --fresh --engine all
 ```

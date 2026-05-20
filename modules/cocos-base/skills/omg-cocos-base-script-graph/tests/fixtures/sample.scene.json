@@ -1,0 +1,45 @@
+{
+  "__type__": "cc.Scene",
+  "_name": "MainScene",
+  "_children": [
+    {
+      "__type__": "cc.Node",
+      "_name": "Canvas",
+      "_components": [
+        {
+          "__type__": "MyUIController",
+          "ctor": "MyUIController",
+          "properties": {
+            "startButtonPrefab": {
+              "__uuid__": "a1b2c3d4e5f6-0001"
+            }
+          }
+        }
+      ],
+      "_children": [
+        {
+          "__type__": "cc.Node",
+          "_name": "Player",
+          "_components": [
+            {
+              "__type__": "Player",
+              "ctor": "Player",
+              "properties": {
+                "weapon": {
+                  "__uuid__": "11223344-aabb"
+                }
+              }
+            }
+          ],
+          "_children": []
+        }
+      ]
+    }
+  ],
+  "_origin": {
+    "kit": "oh-my-game-kit-cocos",
+    "repository": "The1Studio/oh-my-game-kit-cocos",
+    "module": "base",
+    "protected": false
+  }
+}

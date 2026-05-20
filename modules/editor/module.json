@@ -2,7 +2,7 @@
   "name": "editor",
   "version": "1.8.0",
   "description": "Editor tooling: scene tools, playtesting, balance, profiling, milestones, wiki, sync, inventory editor",
-  "required": true,
+  "required": false,
   "dependencies": {
     "base": ">=1.0.0"
   },

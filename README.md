@@ -208,5 +208,5 @@ Pushing `release` runs CI and publishes `@tranvietanh0/oh-my-game-kit` to GitHub
 Users can also pin an exact tag:
 
 ```sh
-npx --yes github:tranvietanh0/oh-my-game-kit#v0.2.0 install --target global --fresh --engine all
+npx --yes github:tranvietanh0/oh-my-game-kit#v0.2.1 install --target global --fresh --engine all
 ```

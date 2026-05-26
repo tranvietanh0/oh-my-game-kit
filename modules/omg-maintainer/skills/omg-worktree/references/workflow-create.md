@@ -24,7 +24,7 @@ When invoked with ambiguous input like "new session for X", "worktree for X", "s
 
 ## Step 1: Get Repo Info
 ```bash
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs info --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs info --json
 ```
 Parse: `repoType`, `baseBranch`, `projects`, `worktreeRoot`.
 
@@ -46,9 +46,9 @@ If monorepo and project not specified, use `AskUserQuestion` with project option
 ## Step 5: Execute
 ```bash
 # Standalone
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs create "<SLUG>" --prefix <TYPE>
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs create "<SLUG>" --prefix <TYPE>
 # Monorepo
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs create "<PROJECT>" "<SLUG>" --prefix <TYPE>
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs create "<PROJECT>" "<SLUG>" --prefix <TYPE>
 ```
 
 ## Step 6: Install Dependencies

@@ -117,7 +117,7 @@ Oh My Game Kit's release pipeline (`parse-commits.cjs` in `oh-my-game-kit-releas
 
 ## Contribution Scoring
 
-After `pr` succeeds (not `cm`/`cp` — no artifact), invoke `omg-contribution-score` with `type=sync-back-pr` + PR URL/title/body and target kit/repo. Fire-and-forget; SSOT gates non-OMG repos. See `.agents/skillsomg-contribution-score/SKILL.md`.
+After `pr` succeeds (not `cm`/`cp` — no artifact), invoke `omg-contribution-score` with `type=sync-back-pr` + PR URL/title/body and target kit/repo. Fire-and-forget; SSOT gates non-OMG repos. See `.agents/skills/omg-contribution-score/SKILL.md`.
 
 ## Scope
 

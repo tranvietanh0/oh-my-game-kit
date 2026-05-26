@@ -50,17 +50,17 @@ omg-kit scaffold oh-my-game-kit-mykitname --base-module core
 
 ### 4. Create Core Files
 
-**`.agentsomg-modules.json`** (registryVersion: 2):
+**`.agents/omg-modules.json`** (registryVersion: 2):
 - kitName, priority: 90, schemaVersion: 2
 - base module entry with required: true
 
-**`.agentsomg-routing-{short}.json`** (registryVersion: 1):
+**`.agents/omg-routing-{short}.json`** (registryVersion: 1):
 - priority: 90, empty roles map (ready to override core)
 
-**`.agentsomg-activation-{short}.json`** (registryVersion: 1):
+**`.agents/omg-activation-{short}.json`** (registryVersion: 1):
 - priority: 90, empty mappings array
 
-**`.agentsomg-config-{short}.json`** (registryVersion: 1):
+**`.agents/omg-config-{short}.json`** (registryVersion: 1):
 - kitName, priority: 90, context.requiredPaths placeholder
 - **MUST include `repos.primary`** — set to `{org}/{kit-name}` (e.g., `"The1Studio/oh-my-game-kit-unity"`)
 - This field is how sync-back and issue skills resolve the GitHub repo for PRs/issues
@@ -97,7 +97,7 @@ omg-kit scaffold oh-my-game-kit-mykitname --base-module core
 {kit-validate output}
 
 ### Next Steps
-1. Edit .agentsomg-config-{short}.json → set requiredPaths for your engine
+1. Edit .agents/omg-config-{short}.json → set requiredPaths for your engine
 2. Verify `repos.primary` in omg-config-{short}.json → must be `{org}/{kit-name}`
 3. Add skills under .agents/modules/{base-module}/skills/
 4. Override roles in omg-routing-{short}.json
@@ -119,8 +119,8 @@ Modular kits keep module.json in **both** locations (the release pipeline expect
 ├── modules/{name}/skills/{skill}/SKILL.md
 ├── .agents/modules/{name}/module.json    ← also required; CI keeps it in sync
 ├── .agents/modules/{name}/skills/{skill}/SKILL.md
-├── .agentsomg-modules.json              ← GENERATED rollup (do not hand-edit)
-└── .agentsomg-activation-{module}.json  ← GENERATED from module.json.activation
+├── .agents/omg-modules.json              ← GENERATED rollup (do not hand-edit)
+└── .agents/omg-activation-{module}.json  ← GENERATED from module.json.activation
 ```
 
 Scaffold practice: write source under `modules/{name}/`, then `cp -r modules/. .agents/modules/` once before the first generator run.
@@ -150,11 +150,11 @@ The generator normalizes `dependencies` to an array of names in the rollup.
 
 ### Bootstrap the generator (first run)
 
-`generate-modules-registry.cjs` self-detects modular kits by requiring **both** `.agents/modules/` and `.agentsomg-modules.json`. A brand-new kit has neither, so the first run is a silent no-op unless you bootstrap.
+`generate-modules-registry.cjs` self-detects modular kits by requiring **both** `.agents/modules/` and `.agents/omg-modules.json`. A brand-new kit has neither, so the first run is a silent no-op unless you bootstrap.
 
 **Fix before first commit:**
 1. Copy modules into overlay: `cp -r modules/. .agents/modules/`
-2. Write a minimal `.agentsomg-modules.json` stub:
+2. Write a minimal `.agents/omg-modules.json` stub:
    ```json
    {
      "registryVersion": 2,
@@ -174,8 +174,8 @@ After that, every time you edit `modules/*/module.json`, re-run the generator an
 ### Do NOT hand-write these files
 
 The generator owns them and will overwrite hand edits:
-- `.agentsomg-modules.json` (the `modules` field — top-level fields like `presets` are preserved)
-- `.agentsomg-activation-{module}.json` for every module whose module.json has an `activation` field
+- `.agents/omg-modules.json` (the `modules` field — top-level fields like `presets` are preserved)
+- `.agents/omg-activation-{module}.json` for every module whose module.json has an `activation` field
 
 Hand-write ONLY the kit-wide activation fragment (e.g., `omg-activation-{short}.json` that matches the kit name — the `marketing` / `web` / etc. fragment).
 
@@ -218,7 +218,7 @@ Every modular kit's `omg-modules.json` MUST declare at minimum:
    }
    ```
 
-**Verification:** after editing, run `omg new --kit {name} --preset full --dry-run` (if available) or `node -e 'JSON.parse(require("fs").readFileSync(".agentsomg-modules.json"))'`. Audit catch precedent (Apr 2026):
+**Verification:** after editing, run `omg new --kit {name} --preset full --dry-run` (if available) or `node -e 'JSON.parse(require("fs").readFileSync(".agents/omg-modules.json"))'`. Audit catch precedent (Apr 2026):
 
 | Kit | Issue caught | Fix PR |
 |---|---|---|
@@ -251,7 +251,7 @@ jobs:
       discord-thread-id: '{thread-id}'        # ← REQUIRED for release notifications
       release-mode: 'modules'
       modular: true
-      modules-file: '.agentsomg-modules.json'
+      modules-file: '.agents/omg-modules.json'
     secrets:
       discord-webhook-url: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
 ```

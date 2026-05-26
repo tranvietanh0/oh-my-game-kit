@@ -82,7 +82,7 @@ Step 4 — Format Report: fill `assets/report-template.md`. Full report — no s
 ## Recommended File Layout
 
 ```
-.agents/skillsomg-{service}-runbook/
+.agents/skills/omg-{service}-runbook/
 ├── SKILL.md                     # Triage workflow
 ├── references/
 │   └── usual-suspects.md        # Common root causes, ordered by frequency

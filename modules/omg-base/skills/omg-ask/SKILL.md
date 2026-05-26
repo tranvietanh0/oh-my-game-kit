@@ -12,7 +12,7 @@ This skill was ported from upstream reference material. Interpret command names,
 Context-aware Q&A that auto-activates relevant skills by topic and checks existing project knowledge.
 
 ## Skill Activation
-Read ALL `.agentsomg-activation-*.json` files.
+Read ALL `.agents/omg-activation-*.json` files.
 Match question keywords against ALL fragments. Activate all matching skills (ADDITIVE).
 
 ## Process

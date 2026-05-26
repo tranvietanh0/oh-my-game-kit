@@ -58,7 +58,7 @@ Scans ALL Oh My Game Kit repos regardless of which project you're in. Discovers 
 **Discovery algorithm:**
 1. Find OMG parent dir: walk up from CWD looking for sibling `oh-my-game-kit-*` directories. Fallback: `/mnt/Work/1M/8. OneAI/` (documented OMG root)
 2. List all `oh-my-game-kit-*` directories + `omg-*` directories in parent
-3. For each directory: read `$HOME/.agentsomg-config-*.json` → extract `repos.primary`
+3. For each directory: read `$HOME/.agents/omg-config-*.json` → extract `repos.primary`
 4. Also include hardcoded known repos not yet cloned:
    ```
    The1Studio/oh-my-game-kit-core

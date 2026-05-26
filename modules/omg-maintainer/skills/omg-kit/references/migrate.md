@@ -68,8 +68,8 @@ Applies to kits that have `omg-routing-*.json` / `omg-activation-*.json` but no 
 3. Normalize deps arrays in {file}
 
 ### Changes Applied  [or: DRY RUN — no files written]
-- Created:  .agentsomg-modules.json
-- Modified: .agentsomg-activation-{kit}.json (+kitName)
+- Created:  .agents/omg-modules.json
+- Modified: .agents/omg-activation-{kit}.json (+kitName)
 
 ### Validation
 {kit-validate output summary}

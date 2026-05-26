@@ -29,7 +29,7 @@ docs/
 ```
 
 ## Agent Routing
-Follow protocol: `skillsomg-cook/references/routing-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/routing-protocol.md`
 This command uses role: `omg-docs-manager`
 
 ## References

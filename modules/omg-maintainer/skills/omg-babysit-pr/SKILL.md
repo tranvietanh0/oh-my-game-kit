@@ -89,4 +89,4 @@ gh pr diff <number>
 
 ## Contribution Scoring
 
-On first poll only, invoke `omg-contribution-score` with `type=sync-back-pr` + PR URL/title/body (catches PRs opened outside any OMG skill). Fire-and-forget; SSOT gates non-OMG repos. See `.agents/skillsomg-contribution-score/SKILL.md`.
+On first poll only, invoke `omg-contribution-score` with `type=sync-back-pr` + PR URL/title/body (catches PRs opened outside any OMG skill). Fire-and-forget; SSOT gates non-OMG repos. See `.agents/skills/omg-contribution-score/SKILL.md`.

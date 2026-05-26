@@ -8,6 +8,7 @@
 const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 
 const SCRIPT_PATH = path.join(__dirname, 'worktree.cjs');
 const STANDALONE_DIR = path.dirname(path.dirname(__dirname)); // worktree dir
@@ -321,11 +322,11 @@ test('info shows worktreeRoot and worktreeRootSource', () => {
 });
 
 test('create --worktree-root overrides default location', () => {
-  const customRoot = '/tmp/test-worktrees';
+  const customRoot = path.join(os.tmpdir(), 'test-worktrees');
   const result = run(`create test-custom-root --prefix feat --dry-run --json --worktree-root "${customRoot}"`);
   assert(result.success, 'Should succeed with custom root');
   const json = assertJSON(result.output);
-  assert(json.wouldCreate.worktreePath.startsWith(customRoot), 'Path should use custom root');
+  assert(json.wouldCreate.worktreePath.startsWith(path.resolve(customRoot)), 'Path should use custom root');
   assert(json.wouldCreate.worktreeRootSource === '--worktree-root flag', 'Source should be flag');
 });
 
@@ -355,15 +356,16 @@ test('superproject detection in submodule', () => {
 });
 
 test('WORKTREE_ROOT env var overrides detection', () => {
-  const envRoot = '/tmp/env-worktrees';
+  const envRoot = path.join(os.tmpdir(), 'env-worktrees');
   try {
-    const output = execSync(`WORKTREE_ROOT="${envRoot}" node "${SCRIPT_PATH}" create test-env --prefix feat --dry-run --json`, {
+    const output = execSync(`node "${SCRIPT_PATH}" create test-env --prefix feat --dry-run --json`, {
       encoding: 'utf-8',
       cwd: STANDALONE_DIR,
+      env: { ...process.env, WORKTREE_ROOT: envRoot },
       stdio: ['pipe', 'pipe', 'pipe']
     });
     const json = JSON.parse(output.trim());
-    assert(json.wouldCreate.worktreePath.startsWith(envRoot), 'Should use env var root');
+    assert(json.wouldCreate.worktreePath.startsWith(path.resolve(envRoot)), 'Should use env var root');
     assert(json.wouldCreate.worktreeRootSource === 'WORKTREE_ROOT env', 'Source should be env');
   } catch (error) {
     // May fail if script path issue - skip
@@ -371,11 +373,13 @@ test('WORKTREE_ROOT env var overrides detection', () => {
 });
 
 test('invalid WORKTREE_ROOT env var fails safely', () => {
-  const invalidRoot = '/etc/passwd';
+  const invalidRoot = path.join(os.tmpdir(), 'worktree-root-file');
+  fs.writeFileSync(invalidRoot, 'not a directory', 'utf8');
   try {
-    execSync(`WORKTREE_ROOT="${invalidRoot}" node "${SCRIPT_PATH}" info --json`, {
+    execSync(`node "${SCRIPT_PATH}" info --json`, {
       encoding: 'utf-8',
       cwd: STANDALONE_DIR,
+      env: { ...process.env, WORKTREE_ROOT: invalidRoot },
       stdio: ['pipe', 'pipe', 'pipe']
     });
     assert(false, 'Should fail with invalid WORKTREE_ROOT');
@@ -517,8 +521,9 @@ test('create handles home directory expansion', () => {
 });
 
 test('create validates file path as worktree root', () => {
-  // /etc/passwd exists but is a file, not directory
-  const result = run('create test-file --prefix feat --json --worktree-root "/etc/passwd"');
+  const fileRoot = path.join(os.tmpdir(), 'worktree-root-file-create');
+  fs.writeFileSync(fileRoot, 'not a directory', 'utf8');
+  const result = run(`create test-file-root-${Date.now()} --prefix feat --json --worktree-root "${fileRoot}"`);
   assert(!result.success, 'Should fail when path is file');
   const json = assertJSON(result.output);
   assert(json.error.code === 'INVALID_WORKTREE_ROOT', 'Should have INVALID_WORKTREE_ROOT');

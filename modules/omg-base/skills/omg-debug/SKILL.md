@@ -30,11 +30,11 @@ Pick by intent; load only the path you need.
 Random fixes waste time and create new bugs. Find root cause, fix at source, validate at every layer, verify before claiming success.
 
 ## Agent Routing
-Follow protocol: `skillsomg-cook/references/routing-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/routing-protocol.md`
 This command uses role: `omg-debugger`
 
 ## Skill Activation
-Follow protocol: `skillsomg-cook/references/activation-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/activation-protocol.md`
 
 ## When to Use
 
@@ -144,7 +144,7 @@ Stop and return to systematic process if thinking:
 **All mean:** Return to systematic process.
 
 ## Subagent Skill Injection (if installedModules present in metadata.json)
-Follow protocol: `skillsomg-cook/references/subagent-injection-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/subagent-injection-protocol.md`
 Before spawning omg-debugger agent, inject module context.
 
 ## Execution Trace (if features.executionTrace enabled)

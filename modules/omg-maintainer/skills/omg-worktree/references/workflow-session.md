@@ -10,7 +10,7 @@ protected: true
 Use this when: user wants to open or switch to an existing worktree session.
 
 ```bash
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs session "<NAME>" --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs session "<NAME>" --json
 ```
 
 Reports: worktree path, branch, session command (`cd <path> && codex`).

@@ -58,7 +58,7 @@ Output includes `uuid` and `nodeId` for MCP assignment — pass directly to Step
 `project-config-discovery.md` for the full process. Quick reference:
 
 ```bash
-node .agents/skillsomg-cocos-playable-parameter/scripts/scan-project-configs.cjs <project-root> --json
+node .agents/skills/omg-cocos-playable-parameter/scripts/scan-project-configs.cjs <project-root> --json
 ```
 
 Scanner classifies each constant into:

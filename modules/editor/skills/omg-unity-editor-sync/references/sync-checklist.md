@@ -20,7 +20,7 @@ If `CK-BASELINE.md` missing → this skill has never been synced. Create it afte
 ### Step 2 — Compare Upstream
 ```
 diff ~/.agents/skills/{skill-name}/SKILL.md \
-     {projectPath}/.agents/skillsomg-{name}/SKILL.md
+     {projectPath}/.agents/skills/omg-{name}/SKILL.md
 ```
 Or read both files and identify structural differences.
 

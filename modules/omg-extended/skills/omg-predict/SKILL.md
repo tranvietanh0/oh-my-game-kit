@@ -89,4 +89,4 @@ omg-predict "Add caching layer to API responses"
 
 ## Sub-Agent Fork Hygiene
 
-**Sub-agent forking:** see `skillsomg-architecture/references/fork-hygiene.md`.
+**Sub-agent forking:** see `.agents/skills/omg-architecture/references/fork-hygiene.md`.

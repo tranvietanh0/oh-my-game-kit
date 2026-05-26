@@ -57,10 +57,10 @@ Load only the reference you need (each is self-contained):
 
 ## Sub-Agent Fork Hygiene
 
-**Sub-agent forking:** see `skillsomg-architecture/references/fork-hygiene.md`.
+**Sub-agent forking:** see `.agents/skills/omg-architecture/references/fork-hygiene.md`.
 
 ## Contribution Scoring
 
 After successful issue creation (or comment-on-duplicate), invoke `omg-contribution-score` with `type=issue`, the resolved `ref_url` (the GitHub issue URL just returned by `gh issue create` or the existing duplicate URL), the issue title + body, and the kit/repo coordinates. Fire-and-forget — never block on the result.
 
-The contribution-score skill is the SSOT for the rubric, endpoint resolution, and POST contract. See `.agents/skillsomg-contribution-score/SKILL.md` for the full invocation contract.
+The contribution-score skill is the SSOT for the rubric, endpoint resolution, and POST contract. See `.agents/skills/omg-contribution-score/SKILL.md` for the full invocation contract.

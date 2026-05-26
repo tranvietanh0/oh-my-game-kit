@@ -12,14 +12,14 @@ This skill was ported from upstream reference material. Interpret command names,
 Context-aware codebase search using the `Explore` agent with skill context injection.
 
 ## Skill Activation
-Read ALL kit-level `.agentsomg-activation-*.json` files PLUS module-level fragments under `.agents/modules/<module>/` matching the same glob.
+Read ALL kit-level `.agents/omg-activation-*.json` files PLUS module-level fragments under `.agents/modules/<module>/` matching the same glob.
 Match query keywords against ALL fragments. Activate all matching skills before exploring.
 
 When resolving a `mappings[].skills[]` entry to a skill dir, accept BOTH the bare-slug form (`nakama-rpc`) and the full-prefixed form (`omg-nakama-rpc`) — the CI prefixer self-heals legacy bare refs at release time but the SSOT in fragment files stays bare. Refs that don't resolve via either form are drift; surface to the user (consult `omg-doctor` check #47).
 
 ## Module-Aware Search (if `installedModules` or `modules` present in metadata.json)
 
-Follow protocol: `skillsomg-modules/references/module-detection-protocol.md`
+Follow protocol: `.agents/skills/omg-modules/references/module-detection-protocol.md`
 
 1. Read `.agents/metadata.json` → installed modules
 2. Annotate each finding with its module: "Found in module: dots-core" or "Found in: kit-wide"

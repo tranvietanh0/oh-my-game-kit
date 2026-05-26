@@ -10,7 +10,7 @@
   "scripts": {
     "validate": "node src/cli.js validate",
     "doctor": "node src/cli.js doctor",
-    "test": "node tests/smoke.test.js",
+    "test": "node tests/smoke.test.js && node tools/run-module-tests.js",
     "check:namespace": "node tools/check-namespace.js",
     "check": "npm run validate && npm test && npm run check:namespace",
     "install:local": "node src/cli.js install --target global --fresh --engine unity",

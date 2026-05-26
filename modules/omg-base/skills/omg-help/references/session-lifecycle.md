@@ -41,7 +41,7 @@ When AI sees `[omg-global-only]` in hook output:
 
 ### MODULE STATE CHECK
 6. **Check module state:**
-   Follow protocol: `skillsomg-modules/references/module-detection-protocol.md`
+   Follow protocol: `.agents/skills/omg-modules/references/module-detection-protocol.md`
    - If v3: read `installedModules` → per-module versions, verify deps satisfied
    - If v2 (legacy): read `modules` list → suggest `omg-doctor fix` to migrate to v3
    - If `kits` key (init format): kits installed but modules not individually tracked → read `omg-modules.json` for available modules
@@ -73,9 +73,9 @@ Then AI processes prompt:
    e. If user declines → proceed with available context, note what may be missing
    f. Do NOT ask repeatedly for the same module within a session
 3. Classify command (cook/fix/debug/etc.)
-4. **Routing — follow `skillsomg-cook/references/routing-protocol.md`**
-5. **Skill Activation — follow `skillsomg-cook/references/activation-protocol.md`**
-6. **Module Context — follow `skillsomg-cook/references/subagent-injection-protocol.md`** (if spawning agents)
+4. **Routing — follow `.agents/skills/omg-cook/references/routing-protocol.md`**
+5. **Skill Activation — follow `.agents/skills/omg-cook/references/activation-protocol.md`**
+6. **Module Context — follow `.agents/skills/omg-cook/references/subagent-injection-protocol.md`** (if spawning agents)
 7. Execute command with module-aware agent
 
 ## During Work
@@ -86,7 +86,7 @@ Then AI processes prompt:
 - After any error fixed: update relevant `$HOME/.agents/skills/` gotcha entry
 - **When modifying module files**: note which module the file belongs to (from metadata)
 - **When suggesting skills**: only suggest skills from installed modules
-- **After any skill file updated**: ALWAYS invoke `omg-sync-back` as a **background sub-agent** (`Task` tool with `run_in_background: true`). NEVER run inline — it interrupts the user's current task. See `skillsomg-fix/references/error-recovery.md` → "Background Sub-Agent Invocation" for the spawn pattern.
+- **After any skill file updated**: ALWAYS invoke `omg-sync-back` as a **background sub-agent** (`Task` tool with `run_in_background: true`). NEVER run inline — it interrupts the user's current task. See `.agents/skills/omg-fix/references/error-recovery.md` → "Background Sub-Agent Invocation" for the spawn pattern.
 - **After discovering a skill/agent bug**: ALWAYS invoke `omg-issue` as a **background sub-agent** (same pattern). NEVER manually create issues and NEVER run the skill inline.
 
 ### Self-Validation Rule (MANDATORY)
@@ -105,7 +105,7 @@ AI MUST verify its own work before asking user to test:
 2. Registry `reviewer`: code review (includes module boundary checks)
 3. Registry `omg-docs-manager`: sync `docs/` if affected
 4. **Module integrity check**: run `omg-doctor` module checks (verify installed module versions and deps)
-5. **Sync-back check**: if any `$HOME/.agents/skills/` files modified, spawn a **background sub-agent** to run `omg-sync-back` (see `skillsomg-fix/references/error-recovery.md` → "Background Sub-Agent Invocation"). NEVER manually copy files and NEVER run the skill inline.
+5. **Sync-back check**: if any `$HOME/.agents/skills/` files modified, spawn a **background sub-agent** to run `omg-sync-back` (see `.agents/skills/omg-fix/references/error-recovery.md` → "Background Sub-Agent Invocation"). NEVER manually copy files and NEVER run the skill inline.
 6. Registry `omg-git-manager`: `omg-git cm` with conventional commit message
 
 ## Wrap Session

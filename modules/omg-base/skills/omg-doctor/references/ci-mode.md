@@ -54,8 +54,8 @@ All checks run sequentially. Failure in an early check does NOT skip later check
   PASS: 24/24 skills have complete frontmatter
 
 [CHECK 2] Agent frontmatter validity
-  FAIL: .agents/agentsomg-fullstack-developer.md — missing field: maxTurns
-  ::error file=.agents/agentsomg-fullstack-developer.md::Missing required frontmatter field: maxTurns
+  FAIL: .codex/agents/omg-fullstack-developer.md — missing field: maxTurns
+  ::error file=.codex/agents/omg-fullstack-developer.md::Missing required frontmatter field: maxTurns
 
 [CHECK 3] Hook syntax
   PASS: 12/12 hook files pass node --check
@@ -74,7 +74,7 @@ All checks run sequentially. Failure in an early check does NOT skip later check
 
 [CHECK 8] Activation check (Tier 2B)
   WARN: 2 skills have no keyword coverage (not in sessionBaseline)
-  ::warning file=.agents/skillsomg-context/SKILL.md::Skill has no keyword mapping and is not in sessionBaseline
+  ::warning file=.agents/skills/omg-context/SKILL.md::Skill has no keyword mapping and is not in sessionBaseline
 
 ## Summary
 FAILED: 1 error, 1 warning
@@ -91,7 +91,7 @@ Exit code: 1
   "checks": [
     { "id": 1, "name": "skill-frontmatter", "status": "pass", "count": 24 },
     { "id": 2, "name": "agent-frontmatter", "status": "fail", "errors": [
-      { "file": ".agents/agentsomg-fullstack-developer.md", "message": "Missing field: maxTurns" }
+      { "file": ".codex/agents/omg-fullstack-developer.md", "message": "Missing field: maxTurns" }
     ]},
     { "id": 3, "name": "hook-syntax", "status": "pass", "count": 12 },
     { "id": 4, "name": "config-schema", "status": "pass", "count": 3 },

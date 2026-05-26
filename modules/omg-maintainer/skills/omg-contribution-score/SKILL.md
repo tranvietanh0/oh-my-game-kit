@@ -85,8 +85,8 @@ Be conservative — when in doubt, pick the lower tier.
 Endpoint resolution order (first match wins):
 
 1. `$OMG_TELEMETRY_ENDPOINT` env var
-2. `<project>/.agentsomg-config-core.json` → `telemetry.cloud.endpoint`, then strip trailing `/ingest` if present
-3. `~/.agentsomg-config-core.json` (global) — same field
+2. `<project>/.agents/omg-config-core.json` → `telemetry.cloud.endpoint`, then strip trailing `/ingest` if present
+3. `~/.agents/omg-config-core.json` (global) — same field
 4. **No endpoint configured → log to stderr and return success-with-skip; do NOT block caller**
 
 ```bash
@@ -95,11 +95,11 @@ Endpoint resolution order (first match wins):
 # requirement #3), but skill bodies are instruction text and assume a POSIX
 # shell. If running on a non-POSIX host, port the same logic to Node.js.
 EP="${OMG_TELEMETRY_ENDPOINT:-}"
-if [ -z "$EP" ] && [ -f .agentsomg-config-core.json ]; then
-  EP=$(jq -r '.telemetry.cloud.endpoint // empty' .agentsomg-config-core.json | sed 's,/ingest$,,')
+if [ -z "$EP" ] && [ -f .agents/omg-config-core.json ]; then
+  EP=$(jq -r '.telemetry.cloud.endpoint // empty' .agents/omg-config-core.json | sed 's,/ingest$,,')
 fi
-if [ -z "$EP" ] && [ -f "$HOME/.agentsomg-config-core.json" ]; then
-  EP=$(jq -r '.telemetry.cloud.endpoint // empty' "$HOME/.agentsomg-config-core.json" | sed 's,/ingest$,,')
+if [ -z "$EP" ] && [ -f "$HOME/.agents/omg-config-core.json" ]; then
+  EP=$(jq -r '.telemetry.cloud.endpoint // empty' "$HOME/.agents/omg-config-core.json" | sed 's,/ingest$,,')
 fi
 [ -z "$EP" ] && { echo "[contribution-score] no endpoint — skipping" >&2; exit 0; }
 ```

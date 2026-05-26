@@ -28,11 +28,11 @@ Context-aware brainstorming. Routes to registered `omg-brainstormer` agent via r
 **Failure mode this guard prevents:** assistant remembers the rule, drafts the question correctly in its head, then because the tool isn't loaded, falls back to "I'll just write the options as prose, and call the tool next time." Drafting prose bullets first is a violation — see `rules/always-ask-on-unresolved.md` "Forbidden prose" table. Especially relevant in brainstorm endgame: "Open questions before I write the plan" lists are the canonical violation pattern.
 
 ## Agent Routing
-Follow protocol: `skillsomg-cook/references/routing-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/routing-protocol.md`
 This command uses role: `omg-brainstormer`
 
 ## Skill Activation
-Follow protocol: `skillsomg-cook/references/activation-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/activation-protocol.md`
 
 <HARD-GATE>
 Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it.
@@ -124,7 +124,7 @@ When brainstorming, check inventory for:
 - If proposing new skills, identify which module they belong to
 
 ## Subagent Skill Injection (if installedModules present in metadata.json)
-Follow protocol: `skillsomg-cook/references/subagent-injection-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/subagent-injection-protocol.md`
 Before spawning omg-brainstormer agent, inject module context.
 
 ## Critical Constraints

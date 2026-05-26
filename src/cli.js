@@ -42,6 +42,11 @@ function fileSha256(filePath) {
   return sha256(fs.readFileSync(filePath));
 }
 
+function pathInside(childPath, parentPath) {
+  const relative = path.relative(path.resolve(parentPath), path.resolve(childPath));
+  return relative === "" || (!relative.startsWith("..") && !path.isAbsolute(relative));
+}
+
 function copyDir(source, target) {
   ensureDir(target);
   for (const entry of fs.readdirSync(source, { withFileTypes: true })) {
@@ -196,10 +201,9 @@ function resolveInstallSelection(args, kit, modules) {
 }
 
 function parseSkillFrontmatter(content) {
-  if (!content.startsWith("---\n")) return { error: "Missing YAML frontmatter" };
-  const end = content.indexOf("\n---", 4);
-  if (end === -1) return { error: "Unclosed YAML frontmatter" };
-  const raw = content.slice(4, end).trim();
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  if (!match) return { error: "Missing YAML frontmatter" };
+  const raw = match[1].trim();
   const fields = {};
   for (const line of raw.split(/\r?\n/)) {
     const idx = line.indexOf(":");
@@ -288,7 +292,10 @@ function globalTarget(args) {
 }
 
 function resolveTarget(args) {
-  return args.target === "project" ? projectTarget(process.cwd()) : globalTarget(args);
+  const target = args.target ? String(args.target) : "global";
+  if (target === "project") return projectTarget(process.cwd());
+  if (target === "global") return globalTarget(args);
+  throw new Error(`Unknown target "${target}". Use project or global.`);
 }
 
 function removeManagedBlock(content) {
@@ -345,6 +352,15 @@ function listSourceAgents() {
     .map((name) => path.join(dir, name));
 }
 
+function resolveSourceAgents(moduleNames, modules) {
+  const requested = new Set();
+  for (const moduleName of moduleNames) {
+    for (const agent of modules.get(moduleName)?.agents ?? []) requested.add(`${agent}.toml`);
+  }
+  const allAgents = listSourceAgents();
+  return allAgents.filter((filePath) => requested.has(path.basename(filePath)));
+}
+
 function agentSlug(filePath) {
   return path.basename(filePath, ".toml").replace(/-/g, "_");
 }
@@ -377,30 +393,51 @@ function mergeCodexConfig(filePath, agentFiles) {
 }
 
 function removeOldSetup(target) {
-  for (const skillsRoot of target.skillsRoots) {
+  const statePath = path.join(target.stateDir, "install-state.json");
+  const state = fs.existsSync(statePath) ? readJson(statePath) : null;
+  const managedSkillsRoots = [...new Set([...target.skillsRoots, ...(state?.skillsRoots ?? [])])];
+
+  for (const file of state?.files ?? []) {
+    const targetFile = path.resolve(String(file.target));
+    const allowed =
+      managedSkillsRoots.some((root) => pathInside(targetFile, root)) ||
+      pathInside(targetFile, target.codexAgentsDir);
+    if (allowed && fs.existsSync(targetFile)) fs.rmSync(targetFile, { force: true });
+  }
+
+  for (const skillsRoot of managedSkillsRoots) {
     if (!fs.existsSync(skillsRoot)) continue;
     for (const entry of fs.readdirSync(skillsRoot, { withFileTypes: true })) {
-      if (entry.isDirectory() && entry.name.startsWith(SKILL_PREFIX)) {
-        removeDirIfExists(path.join(skillsRoot, entry.name));
-      }
+      if (!entry.isDirectory() || !entry.name.startsWith(SKILL_PREFIX)) continue;
+      const dirPath = path.join(skillsRoot, entry.name);
+      if (listFiles(dirPath).length === 0) removeDirIfExists(dirPath);
     }
   }
   if (fs.existsSync(target.agentsMd)) {
     const cleaned = removeManagedBlock(fs.readFileSync(target.agentsMd, "utf8"));
     fs.writeFileSync(target.agentsMd, cleaned, "utf8");
   }
-  if (fs.existsSync(target.codexAgentsDir)) {
-    for (const entry of fs.readdirSync(target.codexAgentsDir, { withFileTypes: true })) {
-      if (entry.isFile() && entry.name.startsWith(SKILL_PREFIX) && entry.name.endsWith(".toml")) {
-        fs.rmSync(path.join(target.codexAgentsDir, entry.name), { force: true });
-      }
-    }
-  }
   if (fs.existsSync(target.codexConfig)) {
     const cleaned = removeManagedTomlBlock(fs.readFileSync(target.codexConfig, "utf8"));
     fs.writeFileSync(target.codexConfig, cleaned, "utf8");
   }
   removeDirIfExists(target.stateDir);
+}
+
+function ensureDirMatchesSource(source, destination) {
+  const sourceFiles = listFiles(source).sort();
+  const destinationFiles = listFiles(destination).sort();
+  const sourceSet = new Set(sourceFiles);
+  const destinationSet = new Set(destinationFiles);
+
+  for (const rel of destinationFiles) {
+    if (!sourceSet.has(rel)) return false;
+  }
+  for (const rel of sourceFiles) {
+    if (!destinationSet.has(rel)) return false;
+    if (fileSha256(path.join(source, rel)) !== fileSha256(path.join(destination, rel))) return false;
+  }
+  return true;
 }
 
 function install(args) {
@@ -424,13 +461,9 @@ function install(args) {
       for (const skill of mod.skills ?? []) {
         const source = path.join(repoRoot, "modules", moduleName, "skills", skill);
         const destination = path.join(skillsRoot, skill);
-        const targetSkill = path.join(destination, "SKILL.md");
-        const sourceSkill = path.join(source, "SKILL.md");
-        if (fs.existsSync(targetSkill) && !args.force) {
-          const existingHash = fileSha256(targetSkill);
-          const sourceHash = fileSha256(sourceSkill);
-          if (existingHash !== sourceHash) {
-            throw new Error(`Conflict: ${targetSkill} differs from source. Use --force or --fresh.`);
+        if (fs.existsSync(destination) && !args.force) {
+          if (!ensureDirMatchesSource(source, destination)) {
+            throw new Error(`Conflict: ${destination} differs from source. Use --force or --fresh.`);
           }
         }
         removeDirIfExists(destination);
@@ -449,7 +482,7 @@ function install(args) {
 
   const installedAgents = [];
   if (!args["no-agents"]) {
-    const sourceAgents = listSourceAgents();
+    const sourceAgents = resolveSourceAgents(moduleNames, modules);
     ensureDir(target.codexAgentsDir);
     for (const sourceAgent of sourceAgents) {
       const destination = path.join(target.codexAgentsDir, path.basename(sourceAgent));

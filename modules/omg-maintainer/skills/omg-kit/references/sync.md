@@ -18,8 +18,8 @@ omg-kit sync --status-only    # Dashboard only, no git operations
 
 ## Kit Discovery
 
-Read `~/.agentsomg-manifest.json` (or `.omg-manifest.json` in cwd) to discover installed kit paths.
-Fall back to checking sibling directories for repos containing `.agentsomg-modules.json`.
+Read `~/.agents/omg-manifest.json` (or `.omg-manifest.json` in cwd) to discover installed kit paths.
+Fall back to checking sibling directories for repos containing `.agents/omg-modules.json`.
 
 ## Workflow
 

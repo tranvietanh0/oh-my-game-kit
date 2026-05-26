@@ -23,7 +23,7 @@ omg-find-skill --all --installed-only   # Only installed skills
 ## Algorithm
 
 1. **Load activation sources:**
-   - Read ALL `.agentsomg-activation-*.json` fragments → collect keyword-to-skill mappings
+   - Read ALL `.agents/omg-activation-*.json` fragments → collect keyword-to-skill mappings
    - Read ALL installed `module.json` files → collect `activation.keywords` per module
    - Read ALL `SKILL.md` frontmatter (`description` field) for richer matching
 

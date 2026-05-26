@@ -13,15 +13,15 @@ Use this when: user wants to synchronize `.env` files across all worktrees, or c
 
 ```bash
 # Sync from main worktree to all others (bidirectional "newest wins")
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs envsync --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs envsync --json
 # Preview only — no files written
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs envsync --dry-run --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs envsync --dry-run --json
 # Custom source worktree
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs envsync --source /path/to/source --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs envsync --source /path/to/source --json
 # Exclude a worktree from the sync
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs envsync --exclude my-feature --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs envsync --exclude my-feature --json
 # Multiple excludes (comma-separated or repeatable)
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs envsync --exclude a,b --exclude c --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs envsync --exclude a,b --exclude c --json
 ```
 
 Reports per worktree: each `.env` file copied/skipped/differs, total summary.

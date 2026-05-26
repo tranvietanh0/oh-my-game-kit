@@ -17,9 +17,9 @@ When the user asks for the help guide, fetch the live registry state via tool ca
 
 - `Read .agents/metadata.json` → installed kits + modules
 - `Read .omg-module-summary.txt` → module summary (may not exist)
-- `Read` each `.agentsomg-routing-*.json` matching glob → role→agent mapping (highest-priority wins per role)
-- `Read` each `.agentsomg-activation-*.json` matching glob → keyword→skill activation
-- `Read` each `.agentsomg-config-*.json` matching glob → extra commands registered by installed kits
+- `Read` each `.agents/omg-routing-*.json` matching glob → role→agent mapping (highest-priority wins per role)
+- `Read` each `.agents/omg-activation-*.json` matching glob → keyword→skill activation
+- `Read` each `.agents/omg-config-*.json` matching glob → extra commands registered by installed kits
 
 If a file does not exist, treat as "no entries" and skip silently — do not echo error.
 
@@ -65,7 +65,7 @@ If a file does not exist, treat as "no entries" and skip silently — do not ech
 
 ## Installed Modules (Dynamic)
 
-Follow protocol: `skillsomg-modules/references/module-detection-protocol.md`
+Follow protocol: `.agents/skills/omg-modules/references/module-detection-protocol.md`
 
 If `installedModules` present in `.agents/metadata.json`, for each installed module:
 - Module name, version (from `installedModules[name].version`), kit, required/optional status

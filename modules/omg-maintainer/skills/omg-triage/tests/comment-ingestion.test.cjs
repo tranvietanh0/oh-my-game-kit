@@ -50,9 +50,10 @@ function assert(condition, message) {
 
 const SKILL_MD = path.resolve(__dirname, '../SKILL.md');
 const PROMPT_MD = path.resolve(__dirname, '../references/comment-classifier-prompt.md');
+const COMMENT_WORKFLOW_MD = path.resolve(__dirname, '../references/comment-enrichment-and-classification.md');
 const FIXTURE = path.resolve(__dirname, 'comment-fixture.json');
 
-const skill = fs.readFileSync(SKILL_MD, 'utf8');
+const skill = `${fs.readFileSync(SKILL_MD, 'utf8')}\n${fs.readFileSync(COMMENT_WORKFLOW_MD, 'utf8')}`;
 const prompt = fs.readFileSync(PROMPT_MD, 'utf8');
 const fixture = JSON.parse(fs.readFileSync(FIXTURE, 'utf8'));
 
@@ -158,7 +159,7 @@ run('SKILL.md forbids persisting comment bodies to telemetry', () => {
 });
 
 run('SKILL.md Step 2c covers author authority, markers, reactions, recency', () => {
-  assert(/### Step 2c/.test(skill), 'Step 2c header missing');
+  assert(/#{2,3} Step 2c/.test(skill), 'Step 2c header missing');
   assert(/OWNER.*MEMBER/i.test(skill), 'author authority ladder missing');
   assert(/fixed in/i.test(skill) && /wontfix/i.test(skill), 'status markers missing');
   assert(/THUMBS_UP/.test(skill), 'thumbs-up reaction signal missing');

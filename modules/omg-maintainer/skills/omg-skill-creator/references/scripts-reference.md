@@ -7,7 +7,7 @@ protected: true
 ---
 # Scripts Reference
 
-All scripts in `.agents/skillsomg-skill-creator/scripts/`. Run with `~/.agents/skills/.venv/bin/python3`.
+All scripts in `.agents/skills/omg-skill-creator/scripts/`. Run with `~/.agents/skills/.venv/bin/python3`.
 
 | Script | Purpose |
 |--------|---------|

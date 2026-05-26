@@ -11,9 +11,9 @@ Use this when: user wants to rebase one or all worktrees onto the latest base br
 
 ```bash
 # Sync all worktrees
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs sync --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs sync --json
 # Sync specific worktree
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs sync --worktree "<NAME>" --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs sync --worktree "<NAME>" --json
 ```
 
 Reports per worktree: status (success/conflict/skipped), ahead/behind, conflicts.

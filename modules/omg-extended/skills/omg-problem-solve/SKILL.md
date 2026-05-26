@@ -11,7 +11,7 @@ This skill was ported from upstream reference material. Interpret command names,
 
 Systematic approaches for different types of stuck-ness. Each technique targets specific problem patterns.
 
-**Auto-activation:** Triggered by OMG error recovery when `omg-debug` or `omg-fix` fails 3+ times on the same issue. See `skillsomg-fix/references/error-recovery.md`.
+**Auto-activation:** Triggered by OMG error recovery when `omg-debug` or `omg-fix` fails 3+ times on the same issue. See `.agents/skills/omg-fix/references/error-recovery.md`.
 
 **MCP integration:** If `mcp__sequential-thinking__sequentialthinking` is available, use it for structured step-by-step analysis within each technique. Fall back to pure markdown methodology if MCP not connected.
 

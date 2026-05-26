@@ -70,7 +70,7 @@ Each subagent spawned by `omg-cook`, `omg-fix`, `omg-debug` gets:
 
 Coordinator receives only result summaries, not full subagent output.
 
-See `skillsomg-cook/references/subagent-injection-protocol.md` for the exact injection steps.
+See `.agents/skills/omg-cook/references/subagent-injection-protocol.md` for the exact injection steps.
 
 ## Decision Framework
 

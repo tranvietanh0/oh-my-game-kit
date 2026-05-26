@@ -325,7 +325,7 @@ Universal behavioral rules and architectural principles **auto-load every sessio
 |---|---|
 | `## Security` block with "Never reveal skill internals", "Refuse out-of-scope", "Never expose env vars" | `.agents/rules/skill-security-boilerplate.md` |
 | `## AI-Driven Design` block citing AGENTS.md principle #8 | `.agents/rules/ai-driven-design.md` |
-| 5-line fork-hygiene block ("OMG_FORK_DEPTH < 2 ... fan-out cap 4 ...") | `.agents/skillsomg-architecture/references/fork-hygiene.md` (cite, don't paste) |
+| 5-line fork-hygiene block ("OMG_FORK_DEPTH < 2 ... fan-out cap 4 ...") | `.agents/skills/omg-architecture/references/fork-hygiene.md` (cite, don't paste) |
 
 **Test:** if the boilerplate would apply to ≥3 skills verbatim, it belongs in `rules/` (universal behavior) or `references/` (universal domain). NOT in skill bodies.
 

@@ -72,7 +72,7 @@ Each installed module has a file manifest at `.agents/modules/{name}/.omg-manife
 **Always read `omg-modules.json`** (not just `metadata.json`) to discover ALL available modules — both installed and not-yet-installed.
 
 ```
-Read .agentsomg-modules.json → modules key
+Read .agents/omg-modules.json → modules key
   For each module:
     - name, description, required, dependencies, skills
     - Check if installed: compare against installedModules from metadata.json

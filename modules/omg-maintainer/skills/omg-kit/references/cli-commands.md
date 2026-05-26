@@ -118,7 +118,7 @@ omg modules create dots-ecs-core --kit oh-my-game-kit-unity --json
   `SKILL.md` — the recommended pattern for modules whose detect rules aren't
   ready yet is to ship `"detect": { "_disabled": true, ... }` so doctor #41
   surfaces it as "needs activation" instead of a hard CI failure.
-- After running this command, **regenerate `.agentsomg-modules.json`** via
+- After running this command, **regenerate `.agents/omg-modules.json`** via
   `generate-modules-registry.cjs` (see `rules/module-registry-sync.md`).
 
 ---

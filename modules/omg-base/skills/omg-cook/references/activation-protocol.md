@@ -14,7 +14,7 @@ protected: true
    - If absent: fall back to manual resolution below
 
 2. **Manual resolution (fallback):**
-   - Read ALL `.agentsomg-activation-*.json` files (CI-generated, released in module ZIPs)
+   - Read ALL `.agents/omg-activation-*.json` files (CI-generated, released in module ZIPs)
    - Also read `module.json` → `activation` field for each installed module (SSOT for per-module activation)
    - Match request/topic keywords against `keywords`/`mappings` arrays in every source
    - Collect ALL matching skills across ALL sources (ADDITIVE — never exclusive)

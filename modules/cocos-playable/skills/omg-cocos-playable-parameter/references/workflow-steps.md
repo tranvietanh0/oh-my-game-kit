@@ -25,7 +25,7 @@ protected: false
 2. Read `ParameterController.ts` → extract existing @property refs
 3. **Run project config scanner (Critical Rule 0):**
    ```bash
-   node .agents/skillsomg-cocos-playable-parameter/scripts/scan-project-configs.cjs <project-root> --json
+   node .agents/skills/omg-cocos-playable-parameter/scripts/scan-project-configs.cjs <project-root> --json
    ```
    This scans `assets/scripts/**/{constant*,*Config*,GameConfig*}.ts`
    (excluding submodules), classifies each exported constant, and dedupes

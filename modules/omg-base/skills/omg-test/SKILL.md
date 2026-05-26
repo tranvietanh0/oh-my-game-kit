@@ -85,11 +85,11 @@ If you are about to push a fix-up commit for a CI failure without updating a ski
 PR oh-my-game-kit-cli#79 (2026-04-21) had `bun run typecheck` clean + 433 tests green, but CI's Lint stage failed on 3 OS matrices because `biome check` wasn't in the local verify step. Cost: one extra round trip. Had a full-verify contract been followed, the formatter violations would have been caught and fixed locally before push. This skill section exists BECAUSE that happened.
 
 ## Agent Routing
-Follow protocol: `skillsomg-cook/references/routing-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/routing-protocol.md`
 This command uses role: `omg-tester`
 
 ## Skill Activation
-Follow protocol: `skillsomg-cook/references/activation-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/activation-protocol.md`
 
 ## Workflow
 
@@ -100,7 +100,7 @@ Follow protocol: `skillsomg-cook/references/activation-protocol.md`
 5. Report structured results
 
 ## Module Context for Tester (if `installedModules` or `modules` present in metadata.json)
-Follow protocol: `skillsomg-cook/references/subagent-injection-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/subagent-injection-protocol.md`
 Before spawning omg-tester agent, inject:
 - Which module's files are being tested (from `.agents/metadata.json`)
 - Module's test skills if available
@@ -108,4 +108,4 @@ Before spawning omg-tester agent, inject:
 
 ## Sub-Agent Fork Hygiene
 
-**Sub-agent forking:** see `skillsomg-architecture/references/fork-hygiene.md`.
+**Sub-agent forking:** see `.agents/skills/omg-architecture/references/fork-hygiene.md`.

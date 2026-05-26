@@ -45,7 +45,7 @@ $CLI init --kit $KIT --kit-path $KIT_PATH --dir $tmpdir -y
 - [ ] Only required module(s) installed (count skills, compare with omg-modules.json required modules)
 - [ ] Kit-wide files present: routing JSON, config JSON, keywords JSON
 - [ ] Agents directory exists with expected agents
-- [ ] No core files overridden (no `skillsomg-cook/`, no `agentsomg-planner.md`, etc.)
+- [ ] No core files overridden (no `.agents/skills/omg-cook/`, no `.codex/agents/omg-planner.toml`, etc.)
 - [ ] `modules/` directory structure present (if modular kit)
 
 ### Phase 3: Preset Init (Full Module Set)
@@ -131,9 +131,9 @@ For each agent file (from either location):
 ### Phase 11: Core Protection
 **Skip this phase when testing `--kit core`** — core IS the source of these files.
 Only run for engine/designer kits:
-- [ ] Kit does NOT contain `skillsomg-cook/`, `skillsomg-plan/` etc. (core skills)
+- [ ] Kit does NOT contain `.agents/skills/omg-cook/`, `.agents/skills/omg-plan/` etc. (core skills)
 - [ ] Kit does NOT contain `omg-routing-core.json` or `omg-activation-core.json`
-- [ ] Kit does NOT contain `agentsomg-planner.md`, `agentsomg-git-manager.md` etc.
+- [ ] Kit does NOT contain `.codex/agents/omg-planner.toml`, `.codex/agents/omg-git-manager.toml` etc.
 
 ### Phase 12: Doctor (if available)
 ```bash

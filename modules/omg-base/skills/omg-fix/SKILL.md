@@ -55,12 +55,12 @@ User override: `--quick` mode allows fast scout-diagnose-fix cycle for trivial i
 
 ## Agent Routing
 
-Follow protocol: `skillsomg-cook/references/routing-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/routing-protocol.md`
 This command uses roles: `implementer`, `omg-debugger`
 
 ## Skill Activation
 
-Follow protocol: `skillsomg-cook/references/activation-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/activation-protocol.md`
 
 ## Workflow Steps
 
@@ -101,8 +101,8 @@ Full activation matrix: `references/skill-activation-matrix.md`
 
 ## Subagent Skill Injection
 
-Follow protocol: `skillsomg-cook/references/subagent-injection-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/subagent-injection-protocol.md`
 
 ## Sub-Agent Fork Hygiene
 
-**Sub-agent forking:** see `skillsomg-architecture/references/fork-hygiene.md`.
+**Sub-agent forking:** see `.agents/skills/omg-architecture/references/fork-hygiene.md`.

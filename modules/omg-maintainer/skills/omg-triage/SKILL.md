@@ -76,7 +76,7 @@ If telemetry endpoint resolves and `gh auth token` works, fetch top-5 score-rank
 
 ```bash
 T=$(gh auth token 2>/dev/null); U=$(gh api user --jq .login 2>/dev/null)
-ENDPOINT="${OMG_TELEMETRY_ENDPOINT:-$(jq -r '.telemetry.cloud.endpoint // empty' "$HOME/.agentsomg-config-core.json" 2>/dev/null | sed 's,/ingest$,,')}"
+ENDPOINT="${OMG_TELEMETRY_ENDPOINT:-$(jq -r '.telemetry.cloud.endpoint // empty' "$HOME/.agents/omg-config-core.json" 2>/dev/null | sed 's,/ingest$,,')}"
 [ -n "$T" ] && [ -n "$U" ] && [ -n "$ENDPOINT" ] && curl -sf -H "Authorization: Bearer $T" \
   "${ENDPOINT}/api/contributors/find-issue?priority=high&limit=5&user=${U}"
 ```

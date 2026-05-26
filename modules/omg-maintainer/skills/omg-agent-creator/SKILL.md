@@ -122,7 +122,7 @@ If an agent may run as a fork child of a skill (verifier, omg-researcher, omg-pl
 
 **Recursion guard:** If body contains Domain Agent Orchestration, gate with `OMG_FORK_DEPTH` check. Never reference the `gitStatus` block — run `git status` yourself if needed.
 
-See `skillsomg-architecture/references/fork-hygiene.md` for parent-side rules.
+See `.agents/skills/omg-architecture/references/fork-hygiene.md` for parent-side rules.
 
 ## Anti-Patterns to Avoid
 

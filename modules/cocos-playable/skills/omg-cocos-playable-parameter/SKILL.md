@@ -40,7 +40,7 @@ Step 0: Intent + MCP → Step 1: Scan → [R] → Step 2: Analyze → Step 2.5: 
 **Run BEFORE scene scan** to surface hardcoded tunables outside `PlayableConfig.ts` (camera/physics tuning, gameplay knobs, color constants used by code not nodes):
 
 ```bash
-node .agents/skillsomg-cocos-playable-parameter/scripts/scan-project-configs.cjs <project-root> --json
+node .agents/skills/omg-cocos-playable-parameter/scripts/scan-project-configs.cjs <project-root> --json
 ```
 
 Scans `assets/scripts/**/{constant*,*Config*,GameConfig*}.ts` (skips submodules), classifies each exported constant, dedupes against PlayableConfig keys.
@@ -107,13 +107,7 @@ See `references/binder-templates.md` for all methods, LoadingScreen mapping, and
 
 ```bash
 # MANDATORY first scan — project-specific config tunables (Rule 0)
-node .agents/skillsomg-cocos-playable-parameter/scripts/scan-project-configs.cjs <project-root> --json
-
-# @property decorators in scripts
-node .agents/skillsomg-cocos-playable-parameter/scripts/scan-component-properties.cjs <path>/assets/scripts
-
-# Scene JSON parser (fallback when MCP offline)
-node .agents/skillsomg-cocos-playable-parameter/scripts/parse-cocos-scene.cjs <path>/assets/scene/MainScene.scene [--json]
+node .agents/skills/omg-cocos-playable-parameter/scripts/scan-project-configs.cjs <project-root> --json
 ```
 
 ## Naming / Baseline / Categories

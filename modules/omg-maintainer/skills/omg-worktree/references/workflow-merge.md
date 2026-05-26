@@ -19,8 +19,8 @@ Merges via `gh pr` instead of local merge because the target branch (e.g., `mast
 
 ## Step 1: Pre-merge checks
 ```bash
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs info --json
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs diff --worktree "<NAME>" --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs info --json
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs diff --worktree "<NAME>" --json
 ```
 - If dirty: commit or stash uncommitted changes first
 - If behind base: rebase is MANDATORY before PR (Step 2)
@@ -87,7 +87,7 @@ Report the reset: show old HEAD vs new HEAD (local), and whether the remote was 
 ## Step 6b: Post-merge (optional flags)
 ```bash
 # --delete: Remove worktree entirely
-node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs remove "<NAME>"
+node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs remove "<NAME>"
 ```
 
 ## Step 7: Update main worktree

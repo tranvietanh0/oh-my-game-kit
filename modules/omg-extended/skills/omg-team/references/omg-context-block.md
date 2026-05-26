@@ -32,7 +32,7 @@ OMG Context:
 ## How to Build
 
 1. Read `.agents/metadata.json` → extract kit name, version, installedModules
-2. Resolve agent role via `skillsomg-cook/references/routing-protocol.md`
+2. Resolve agent role via `.agents/skills/omg-cook/references/routing-protocol.md`
 3. Read module's `.omg-manifest.json` → extract file list → derive ownership globs
 4. Read module's activation fragment → extract skill names
 5. Get current git branch: `git branch --show-current`
@@ -47,7 +47,7 @@ When a teammate runs as a fork child of the parent skill (parent has `context: f
 - Return a constant placeholder result (e.g., `{ status: "ok" }`) from the child so the parent isn't token-billed for full child output.
 - Apply anti-avoidance prompting for any verifier sub-agents: enumerate excuses explicitly and reinject "verify ONLY, do NOT fix" after every tool result.
 
-Full rules: `skillsomg-architecture/references/fork-hygiene.md`
+Full rules: `.agents/skills/omg-architecture/references/fork-hygiene.md`
 
 ## Example (Unity Kit, Combat Module)
 

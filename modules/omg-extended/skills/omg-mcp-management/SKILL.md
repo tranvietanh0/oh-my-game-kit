@@ -121,7 +121,7 @@ The subagent handles the discovery in its own context window and returns a trimm
 
 ## Dependency on agents
 
-This skill pairs with the `omg-mcp-manager` agent (`.agents/agentsomg-mcp-manager.md` in `oh-my-game-kit-core`). The skill teaches YOU (the main agent) the rules; the agent does the heavy lifting in an isolated context. Both must exist for the "delegate heavy discovery" step to work.
+This skill pairs with the `omg-mcp-manager` agent (`.codex/agents/omg-mcp-manager.md` in `oh-my-game-kit-core`). The skill teaches YOU (the main agent) the rules; the agent does the heavy lifting in an isolated context. Both must exist for the "delegate heavy discovery" step to work.
 
 ## References
 

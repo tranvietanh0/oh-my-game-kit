@@ -14,7 +14,7 @@ protected: true
    - If absent: fall back to manual resolution below
 
 2. **Manual resolution (fallback):**
-   - Read ALL `.agentsomg-routing-*.json` files
+   - Read ALL `.agents/omg-routing-*.json` files
    - Sort by `priority` field (descending — higher number wins)
    - For each role, use the highest-priority registration found
    - Fallback to `omg-routing-core.json` (p10) if role not found elsewhere

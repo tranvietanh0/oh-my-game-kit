@@ -466,7 +466,7 @@ function main() {
 
   writeJson(path.join(repoRoot, "kit.json"), {
     name: "oh-my-game-kit",
-    version: "0.2.0",
+    version: "0.2.1",
     provider: "codex",
     description: "Codex-native Oh My Game Kit core, Unity, and Cocos game-development workflows.",
     generatedFrom: {

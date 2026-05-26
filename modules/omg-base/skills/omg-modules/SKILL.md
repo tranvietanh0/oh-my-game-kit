@@ -32,7 +32,7 @@ are resolved automatically using semver ranges.
 
 ## Module State Detection
 
-Follow protocol: `skillsomg-modules/references/module-detection-protocol.md`
+Follow protocol: `.agents/skills/omg-modules/references/module-detection-protocol.md`
 
 Detect installed kits from MULTIPLE signals:
 1. `metadata.json` → `installedModules` or `kits` key
@@ -48,7 +48,7 @@ When a module subcommand runs, fetch live state via tool calls AFTER the body is
 
 - `Read .agents/metadata.json` → v3 schema, `installedModules[]`, `kits[]`
 - `Read .omg-module-summary.txt` → quick summary (file may not exist)
-- `Read .agentsomg-modules.json` → registry of available modules + presets
+- `Read .agents/omg-modules.json` → registry of available modules + presets
 
 If a file doesn't exist, treat as "no modular kits installed" — do not echo error.
 
@@ -79,7 +79,7 @@ For `ambiguous[]` entries, regex hits alone are insufficient. Codex reasons over
 
 1. Read each ambiguous entry's `excerpts[]` (file + line + snippet).
 2. Open the first 1–2 source files via the `Read` tool to confirm the semantic fit.
-3. Cross-reference the module's `description` and `skills[]` in `.agentsomg-modules.json`.
+3. Cross-reference the module's `description` and `skills[]` in `.agents/omg-modules.json`.
 4. Form a per-module recommendation with explicit rationale, e.g. *"unity-mobile: the project compiles for iOS + reads `Application.platform == IPhone` in 3 files; AndroidManifest.xml is absent. Recommend install."*
 5. Present a single conversational summary to the user: per-module `INSTALL / SKIP / NEED MORE INFO`, reasons included. Never auto-apply on ambiguous.
 

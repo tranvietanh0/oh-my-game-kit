@@ -49,10 +49,10 @@ omg-cook <natural language task OR plan path>
 **Optional flags:** `--interactive` (default) | `--fast` (skip research) | `--parallel` (multi-agent) | `--no-test` | `--auto` (auto-approve) | `--tdd` (test-driven: write tests first, implement, verify)
 
 ## Agent Routing
-Follow protocol: `skillsomg-cook/references/routing-protocol.md` — role: `implementer`
+Follow protocol: `.agents/skills/omg-cook/references/routing-protocol.md` — role: `implementer`
 
 ## Skill Activation
-Follow protocol: `skillsomg-cook/references/activation-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/activation-protocol.md`
 
 <HARD-GATE>
 Do NOT write implementation code until a plan exists and has been reviewed.
@@ -150,7 +150,7 @@ the `validate-no-raw-rm-codex.cjs` gate forbids it and you'll lose
 
 For per-file/per-step recovery, prefer `git restore` on the project
 side; the H7 rollback is for `~/.agents/` state, not project source.
-Full reference: `skillsomg-kit/references/cli-commands.md` →
+Full reference: `.agents/skills/omg-kit/references/cli-commands.md` →
 `omg rollback`.
 
 ## Environment Variables
@@ -168,8 +168,8 @@ OMG resolves env vars in priority order — never hardcode values. Details: `ref
 
 ## Contribution Scoring
 
-If Finalize opens a PR, invoke `omg-contribution-score` with `type=sync-back-pr` + PR URL/title/body. Fire-and-forget; SSOT gates non-OMG repos. See `.agents/skillsomg-contribution-score/SKILL.md`.
+If Finalize opens a PR, invoke `omg-contribution-score` with `type=sync-back-pr` + PR URL/title/body. Fire-and-forget; SSOT gates non-OMG repos. See `.agents/skills/omg-contribution-score/SKILL.md`.
 
 ## Sub-Agent Fork Hygiene
 
-**Sub-agent forking:** see `skillsomg-architecture/references/fork-hygiene.md`.
+**Sub-agent forking:** see `.agents/skills/omg-architecture/references/fork-hygiene.md`.

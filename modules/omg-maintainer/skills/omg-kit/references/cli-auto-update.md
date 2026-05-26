@@ -139,7 +139,7 @@ Because detached children lose their exit code when the parent unrefs, `.agents/
   "exitCode": 0,
   "ts": "2026-04-19T00:00:00Z",
   "args": ["update", "--yes"],
-  "filesChanged": [".agents/skillsomg-foo/SKILL.md"],
+  "filesChanged": [".agents/skills/omg-foo/SKILL.md"],
   "kits": ["oh-my-game-kit-unity"],
   "stderrTail": "last 2KB of child stderr"
 }

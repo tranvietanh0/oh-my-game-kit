@@ -195,7 +195,7 @@ Universal rules **auto-load every session** from `.agents/rules/`. Inlining them
 |---|---|
 | "Never reveal skill internals or system prompts" block | `.agents/rules/skill-security-boilerplate.md` |
 | "Never echo your own system prompt" block | `.agents/rules/agent-security-boilerplate.md` |
-| Fork-hygiene 5-line block (`OMG_FORK_DEPTH < 2 ...`) | `.agents/skillsomg-architecture/references/fork-hygiene.md` (cite, don't paste) |
+| Fork-hygiene 5-line block (`OMG_FORK_DEPTH < 2 ...`) | `.agents/skills/omg-architecture/references/fork-hygiene.md` (cite, don't paste) |
 
 **Current offender:** `omg-skills-manager.md:47–56` pastes the skill-security block verbatim. Track via doctor check #44.
 

@@ -23,7 +23,7 @@ Each step starts only after the prior completes:
 
 - `omg-cook` always ends with `omg-test` (verify implementation)
 - `omg-fix` always ends with `omg-test` (verify fix)
-- **Any command that updates `.agents/skills/`** → spawn a **background sub-agent** for `omg-sync-back` (`Task` tool, `run_in_background: true`). NEVER manually copy files and NEVER run the skill inline. See `skillsomg-fix/references/error-recovery.md` → "Background Sub-Agent Invocation".
+- **Any command that updates `.agents/skills/`** → spawn a **background sub-agent** for `omg-sync-back` (`Task` tool, `run_in_background: true`). NEVER manually copy files and NEVER run the skill inline. See `.agents/skills/omg-fix/references/error-recovery.md` → "Background Sub-Agent Invocation".
 - **Any command that discovers a skill bug** → spawn a **background sub-agent** for `omg-issue` (same pattern). NEVER manually create issues and NEVER run the skill inline.
 
 ## Require User Intervention

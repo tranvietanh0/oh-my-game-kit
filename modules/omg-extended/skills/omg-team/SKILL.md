@@ -17,7 +17,7 @@ Orchestrate parallel Codex Agent Teams with OMG infrastructure: registry-routed 
 
 ## Agent Routing
 
-Follow protocol: `skillsomg-cook/references/routing-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/routing-protocol.md`
 Templates resolve roles dynamically: `omg-researcher`, `implementer`, `reviewer`, `omg-debugger`, `omg-tester`, `omg-planner`
 
 ## Templates
@@ -60,10 +60,10 @@ Templates resolve roles dynamically: `omg-researcher`, `implementer`, `reviewer`
    Why this matters: `TeamCreate`/`TeamDelete`/the team-mode `SendMessage` variants are only registered as tools when the env var is set at session start. When unset they are absent from the tool list entirely — there is no error to catch. Without this explicit availability check, the AI satisfies "spawn parallel teammates" with whatever tools it has (regular `Agent`), and the user gets degraded "team-shaped output" without worktree isolation, manifest-derived file ownership, or the shared task list.
 
    Once verified available, call `TeamCreate(team_name: ...)` per the matching template. If `TeamCreate` errors AFTER passing the availability check, surface the error and STOP.
-2. **Resolve roles** — follow `skillsomg-cook/references/routing-protocol.md`
-3. **Detect modules** — follow `skillsomg-modules/references/module-detection-protocol.md`
+2. **Resolve roles** — follow `.agents/skills/omg-cook/references/routing-protocol.md`
+3. **Detect modules** — follow `.agents/skills/omg-modules/references/module-detection-protocol.md`
 4. **Derive file ownership** — `references/manifest-ownership-resolution.md`
-5. **Build skill injection** — follow `skillsomg-cook/references/subagent-injection-protocol.md`
+5. **Build skill injection** — follow `.agents/skills/omg-cook/references/subagent-injection-protocol.md`
 6. **Cost warning** — inform user of teammate count and estimated token cost
 
 Every teammate spawn prompt MUST include the OMG Context Block: `referencesomg-context-block.md`

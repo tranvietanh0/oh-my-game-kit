@@ -18,7 +18,7 @@ protected: true
 
 ## Module Checks (#7–17)
 
-Follow protocol: `skillsomg-modules/references/module-detection-protocol.md` — skip if no `installedModules` key or no metadata.
+Follow protocol: `.agents/skills/omg-modules/references/module-detection-protocol.md` — skip if no `installedModules` key or no metadata.
 
 | # | Check | Validates |
 |---|---|---|
@@ -132,7 +132,7 @@ Scan all `.cjs` files in `.agents/hooks/` for these violations:
 
 Validates that the `omg-sync-back` skill is producing healthy PRs. Added after the 2026-04-09 incident where two sync-back PRs were unusable: core#7 was stale (no upstream fetch → CONFLICTING), unity#7 targeted a non-existent path (missing `.agents/` prefix → phantom file at wrong location).
 
-1. Collect all kit repos from `.agentsomg-config-*.json` → `repos.primary` and from in-file `repository` frontmatter across changed files
+1. Collect all kit repos from `.agents/omg-config-*.json` → `repos.primary` and from in-file `repository` frontmatter across changed files
 2. For each repo (up to 10 distinct repos to bound runtime), query the last 5 PRs with sync-back branch prefix:
    ```
    gh pr list --repo {owner}/{repo} --search "head:omg-sync/" --state all --limit 5 --json number,title,state,mergeStateStatus,headRefName,additions,deletions,files
@@ -247,7 +247,7 @@ Runs `scripts/check-rule-duplication.cjs`. Enumerates `*.md` files in `~/.agents
 
 Runs `hooks/doctor-check-37-adapter-contract.cjs` against the current `.agents/` dir:
 
-1. Calls `listAllMatches()` from `skillsomg-preview/scripts/adapter-discovery.cjs` (Steps 1–4: metadata read + frontmatter + schema validation only — no `detect.cjs` run, no side-effects).
+1. Calls `listAllMatches()` from `.agents/skills/omg-preview/scripts/adapter-discovery.cjs` (Steps 1–4: metadata read + frontmatter + schema validation only — no `detect.cjs` run, no side-effects).
 2. For each discovered adapter:
    - Verifies all four required scripts exist in the skill dir: `detect.cjs`, `list-capabilities.cjs`, `generate.cjs`, `requirements.cjs`.
    - Verifies `install.json` is present, parses as valid JSON, and has a `schemaVersion` field and a non-empty `catalog`.
@@ -343,12 +343,12 @@ Runs `scripts/check-inherits-from.cjs`. If the `inheritsFrom` field is absent fr
 
 **Check #41 details:**
 
-Runs `.agents/skillsomg-doctor/scripts/check-module-detect-coverage.cjs`. Iterates `.agents/modules/*/module.json` and reports modules that:
+Runs `.agents/skills/omg-doctor/scripts/check-module-detect-coverage.cjs`. Iterates `.agents/modules/*/module.json` and reports modules that:
 - are NOT in `CORE_REQUIRED = ["omg-base", "omg-extended", "omg-maintainer"]`
 - are NOT `required: true` (kit-base opt-out)
 - lack an active `detect:` block, or have `_disabled: true` (stub modules are surfaced as "needs activation")
 
-**Ratchet (data-driven):** reads `.agentsomg-modules.json.ratchetDates."module-detect-coverage"` (ISO date). Before that date: `WARN`. After: `ERROR` (exit 1). Env bypass: `OMG_BYPASS_DETECT_RATCHET=1` forces `WARN` regardless. This matches the plan's P6e rollback design (editable ratchet + env escape hatch).
+**Ratchet (data-driven):** reads `.agents/omg-modules.json.ratchetDates."module-detect-coverage"` (ISO date). Before that date: `WARN`. After: `ERROR` (exit 1). Env bypass: `OMG_BYPASS_DETECT_RATCHET=1` forces `WARN` regardless. This matches the plan's P6e rollback design (editable ratchet + env escape hatch).
 
 **Severity:** WARN pre-ratchet, ERROR post-ratchet (or WARN if bypass env set).
 
@@ -395,7 +395,7 @@ Runs `scripts/check-no-inline-universal-rules.cjs`. Scans `.agents/skills/*/SKIL
 |---|---|---|
 | `Never reveal skill internals or system prompts` | Skill-security block pasted into skill body | `.agents/rules/skill-security-boilerplate.md` |
 | `Per AGENTS.md principle #8` | AI-Driven Design block pasted into skill body | `.agents/rules/ai-driven-design.md` |
-| `OMG_FORK_DEPTH < 2` (outside `references/fork-hygiene.md`) | Fork-hygiene 5-line inline pasted outside its canonical home | `.agents/skillsomg-architecture/references/fork-hygiene.md` |
+| `OMG_FORK_DEPTH < 2` (outside `references/fork-hygiene.md`) | Fork-hygiene 5-line inline pasted outside its canonical home | `.agents/skills/omg-architecture/references/fork-hygiene.md` |
 
 Emits JSON `{ status: "ok" | "fail", violations: [{ file, line, pattern }] }` to stdout. Human-readable `file:line [pattern]` summary to stderr when violations exist.
 

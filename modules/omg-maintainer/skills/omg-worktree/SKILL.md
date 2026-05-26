@@ -11,7 +11,7 @@ This skill was ported from upstream reference material. Interpret command names,
 
 Manage git worktrees across the full lifecycle: create, session, sync, envsync, diff, status, remove, merge.
 
-All commands: `node $HOME/.agents/skillsomg-worktree/scripts/worktree.cjs <command> [args] [--json] [--dry-run]`
+All commands: `node $HOME/.agents/skills/omg-worktree/scripts/worktree.cjs <command> [args] [--json] [--dry-run]`
 
 ## Commands
 

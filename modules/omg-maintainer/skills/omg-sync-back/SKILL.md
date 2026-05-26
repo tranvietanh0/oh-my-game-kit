@@ -61,4 +61,4 @@ Load only the reference you need (each is self-contained):
 
 After successful PR creation, invoke `omg-contribution-score` with `type=sync-back-pr`, the resolved `ref_url` (the PR URL returned by `gh pr create`), the PR title + description, and the target kit/repo. Fire-and-forget — never block on the result.
 
-See `.agents/skillsomg-contribution-score/SKILL.md` for the full invocation contract (rubric, endpoint resolution, POST contract). Do NOT inline rubric or POST logic here — the SSOT lives in that skill.
+See `.agents/skills/omg-contribution-score/SKILL.md` for the full invocation contract (rubric, endpoint resolution, POST contract). Do NOT inline rubric or POST logic here — the SSOT lives in that skill.

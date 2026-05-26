@@ -39,7 +39,7 @@ OMG uses a registry-routed supervisor pattern. The AI (orchestrator) reads routi
 
 **Agent fallback chain**: module agent (p91+) → kit agent (p90) → core agent (p10)
 
-See `skillsomg-cook/references/routing-protocol.md` for resolution algorithm.
+See `.agents/skills/omg-cook/references/routing-protocol.md` for resolution algorithm.
 
 ## Context Injection Pattern (OMG Subagent Injection Protocol)
 
@@ -56,7 +56,7 @@ Module context:
 
 **Critical**: inject only the target module's skills. Do NOT dump all installed skills — that defeats context isolation.
 
-See `skillsomg-cook/references/subagent-injection-protocol.md` for full steps.
+See `.agents/skills/omg-cook/references/subagent-injection-protocol.md` for full steps.
 
 ## OMG Team Pattern (Parallel Agents)
 
@@ -123,7 +123,7 @@ Strategy layer → Planning layer → Execution layer.
 5. Design clear handoffs with explicit ownership
 6. Validate results between agent boundaries
 7. Implement circuit breakers (3+ failures → escalate)
-8. Context isolation protocol: `skillsomg-cook/references/subagent-injection-protocol.md`
+8. Context isolation protocol: `.agents/skills/omg-cook/references/subagent-injection-protocol.md`
 
 ## Related
 

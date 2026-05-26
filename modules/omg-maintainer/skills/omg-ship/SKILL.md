@@ -13,7 +13,7 @@ Single command to ship a feature branch. Fully automated — only stops for test
 
 ## Agent Routing
 
-Follow protocol: `skillsomg-cook/references/routing-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/routing-protocol.md`
 This command uses roles: `omg-tester`, `reviewer`, `omg-docs-manager`, `omg-git-manager`
 
 ## Arguments
@@ -78,7 +78,7 @@ PR: https://github.com/org/repo/pull/123 (linked: #42, #43)
 ## Subagent Delegation (MANDATORY)
 
 Steps 4, 5, 8: delegate to registry-routed subagents — do NOT inline.
-Follow protocol: `skillsomg-cook/references/subagent-injection-protocol.md` if installedModules present.
+Follow protocol: `.agents/skills/omg-cook/references/subagent-injection-protocol.md` if installedModules present.
 
 ## Multi-Repo Rollout Sequence
 
@@ -86,8 +86,8 @@ For coordinated rollouts across the Oh My Game Kit ecosystem (CLI-first, kit-sec
 
 ## Contribution Scoring
 
-After Step 11 (Create PR), invoke `omg-contribution-score` with `type=sync-back-pr` + PR URL/title/body. Fire-and-forget; SSOT gates non-OMG repos. See `.agents/skillsomg-contribution-score/SKILL.md`.
+After Step 11 (Create PR), invoke `omg-contribution-score` with `type=sync-back-pr` + PR URL/title/body. Fire-and-forget; SSOT gates non-OMG repos. See `.agents/skills/omg-contribution-score/SKILL.md`.
 
 ## Sub-Agent Fork Hygiene
 
-**Sub-agent forking:** see `skillsomg-architecture/references/fork-hygiene.md`.
+**Sub-agent forking:** see `.agents/skills/omg-architecture/references/fork-hygiene.md`.

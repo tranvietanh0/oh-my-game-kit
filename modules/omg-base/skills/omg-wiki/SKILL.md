@@ -96,7 +96,7 @@ in frontmatter (`wikiSection: ...`) or falling back to alphabetical.
 
 ## Agent routing
 
-Follow protocol: `skillsomg-cook/references/routing-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/routing-protocol.md`
 This skill typically runs inline (no agent delegation) because each
 operation is deterministic. For multi-page rewrites, route to role:
 `omg-docs-manager`.

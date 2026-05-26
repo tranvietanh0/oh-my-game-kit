@@ -72,7 +72,7 @@ every step where decisions remain — not just the final cook handoff. See
 for the exact pattern to avoid.
 
 ## Agent Routing
-Follow protocol: `skillsomg-cook/references/routing-protocol.md`
+Follow protocol: `.agents/skills/omg-cook/references/routing-protocol.md`
 This command uses role: `omg-planner`
 
 ## Skill Inventory Injection (if `installedModules` present in metadata.json)
@@ -127,4 +127,4 @@ For self-assembling kit architecture (Pillars 1–4: SSOT spec files, schema ver
 
 ## Sub-Agent Fork Hygiene
 
-**Sub-agent forking:** see `skillsomg-architecture/references/fork-hygiene.md`.
+**Sub-agent forking:** see `.agents/skills/omg-architecture/references/fork-hygiene.md`.

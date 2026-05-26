@@ -18,7 +18,7 @@ manually after every dashboard change.
 ## Deterministic Discovery — Use The Scanner Script
 
 ```bash
-node .agents/skillsomg-cocos-playable-parameter/scripts/scan-project-configs.cjs \
+node .agents/skills/omg-cocos-playable-parameter/scripts/scan-project-configs.cjs \
   <project-root> [--json] [--include-covered]
 ```
 

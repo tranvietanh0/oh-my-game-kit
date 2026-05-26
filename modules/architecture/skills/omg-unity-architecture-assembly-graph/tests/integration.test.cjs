@@ -65,13 +65,18 @@ test('detect.cjs exits 0 for mini-unity-project', () => {
   assert.strictEqual(result.status, 0, `detect.cjs should exit 0 for Unity project`);
 });
 
-test('detect.cjs exits 1 for non-Unity directory (os.tmpdir)', () => {
-  const result = spawnSync('node', [path.join(SKILL_DIR, 'scripts', 'detect.cjs')], {
-    cwd: os.tmpdir(),
-    windowsHide: true,
-    stdio: ['pipe', 'pipe', 'pipe']
-  });
-  assert.strictEqual(result.status, 1, `detect.cjs should exit 1 for non-Unity directory`);
+test('detect.cjs exits 1 for empty non-Unity directory', () => {
+  const nonUnityDir = fs.mkdtempSync(path.join(os.tmpdir(), 'omg-non-unity-'));
+  try {
+    const result = spawnSync('node', [path.join(SKILL_DIR, 'scripts', 'detect.cjs')], {
+      cwd: nonUnityDir,
+      windowsHide: true,
+      stdio: ['pipe', 'pipe', 'pipe']
+    });
+    assert.strictEqual(result.status, 1, `detect.cjs should exit 1 for non-Unity directory`);
+  } finally {
+    fs.rmSync(nonUnityDir, { recursive: true, force: true });
+  }
 });
 
 test('list-capabilities.cjs returns JSON array with 4 capabilities', () => {

@@ -25,7 +25,7 @@ Create effective, eval-driven Oh My Game Kit skills using progressive disclosure
 ## Skill Structure
 
 ```
-.agents/skillsomg-{name}/
+.agents/skills/omg-{name}/
 ├── SKILL.md              (required, <150 lines)
 ├── scripts/              (optional: executable code)
 ├── references/           (optional: docs loaded as-needed)
@@ -71,7 +71,7 @@ After scaffolding ANY new file under `.agents/`, immediately read it back and ve
 
 ## Decision-Tree Body Pattern
 
-For skills with 3+ distinct usage paths or input modes, prepend a 5-row decision-tree table to the body. The table maps user intent → which section to read. Reference: `.agents/skillsomg-architecture/SKILL.md` lines 26-39 (canonical example). Pattern shipped on `omg-cook`, `omg-fix`, `omg-debug` in the architecture review rollout.
+For skills with 3+ distinct usage paths or input modes, prepend a 5-row decision-tree table to the body. The table maps user intent → which section to read. Reference: `.agents/skills/omg-architecture/SKILL.md` lines 26-39 (canonical example). Pattern shipped on `omg-cook`, `omg-fix`, `omg-debug` in the architecture review rollout.
 
 ```markdown
 ## Decision Tree
@@ -171,7 +171,7 @@ When reviewing a skill: load `references/architecture-rules.md`, walk the 10 cat
 - **Parallel eval spawning is critical** — MUST spawn with-skill AND without-skill runs simultaneously
 - **Extended thinking budget** — `improve_description.py` uses 10k token thinking budget
 - **Cross-update the parent module's `detect:` when adding a skill** — when this skill creates a new skill under `.agents/modules/<parent>/<skill-dir>/`, the parent module's `module.json` needs its `skills[]` array extended. If the parent module has an active `detect:` block (not `_optOut` / `_disabled`), surface a suggestion to the author: "Your new skill's keywords or primary-file pattern may need to be added to the module's `detect.anyOf[]` so the scanner continues to match projects that use this skill." Never silently rewrite the detect regex — the author knows their domain; the skill-creator only prompts.
-- **Never hardcode module preset names** — When a skill branches on or references kit preset names (`full`, `everything`, `base`, `extended`, etc.), ALWAYS read them at runtime from `.agentsomg-modules.json` (`registry.presets`). Hardcoded preset strings caused the Apr 2026 preset-"full" regression across Cocos/Unity/Web/Nakama. Module selection UX is also multi-select-only (presets are CLI flags, not UI items) — see `oh-my-game-kit-core/docs/module-selection-ux.md` for the full rule. During skill creation, flag any author code that string-matches preset names and suggest a registry read instead.
+- **Never hardcode module preset names** — When a skill branches on or references kit preset names (`full`, `everything`, `base`, `extended`, etc.), ALWAYS read them at runtime from `.agents/omg-modules.json` (`registry.presets`). Hardcoded preset strings caused the Apr 2026 preset-"full" regression across Cocos/Unity/Web/Nakama. Module selection UX is also multi-select-only (presets are CLI flags, not UI items) — see `oh-my-game-kit-core/docs/module-selection-ux.md` for the full rule. During skill creation, flag any author code that string-matches preset names and suggest a registry read instead.
 
 ## Scope
 

@@ -10,7 +10,65 @@ The kit installs `omg-*` skills into Codex skill roots and merges a small manage
 - npm
 - Codex Desktop or Codex CLI using local skill folders
 
-## One-Line Install From GitHub
+## Quick Start
+
+Use this path if you want the `omg-kit` command available in your terminal.
+
+### 1. Install the CLI command
+
+Windows PowerShell, macOS, or Linux:
+
+```sh
+npm install --global https://github.com/tranvietanh0/oh-my-game-kit/archive/refs/heads/release.tar.gz
+```
+
+Verify:
+
+```sh
+omg-kit --help
+```
+
+Avoid `npm install --global github:tranvietanh0/oh-my-game-kit#release` on Windows. Some npm versions create a global shim that points at a temporary git cache folder, which can later break with `Cannot find module ... src/cli.js`.
+
+### 2. Install compact global skills
+
+This gives Codex the core `omg-*` workflow skills without loading every Unity/Cocos skill globally:
+
+```sh
+omg-kit install --target global --fresh --preset core
+```
+
+### 3. Install engine skills in each project
+
+Run the matching command from the root folder of the project where Codex will work.
+
+Unity:
+
+```sh
+omg-kit install --target project --fresh --engine unity
+```
+
+Cocos:
+
+```sh
+omg-kit install --target project --fresh --engine cocos
+```
+
+Unity + Cocos:
+
+```sh
+omg-kit install --target project --fresh --engine all
+```
+
+Check the install:
+
+```sh
+omg-kit doctor --target project
+```
+
+## One-Line Skill Install From GitHub
+
+Use this if you do not need to keep the `omg-kit` command installed globally.
 
 Windows PowerShell:
 
@@ -30,7 +88,7 @@ The one-line installer asks which engine to install when `OMG_ENGINE` is not set
 - `Cocos`: installs the `cocos-playable` preset.
 - `Both`: installs the `full` preset.
 
-It installs globally, refreshes managed Oh My Game Kit files, installs skills into `~/.codex/skills`, and installs optional Codex agents into `~/.codex/agents`. The installer keeps one global skill root by default so Codex CLI does not waste its skill context budget on duplicate global skills.
+It installs skills globally, refreshes managed Oh My Game Kit files, installs skills into `~/.codex/skills`, and installs optional Codex agents into `~/.codex/agents`. For Codex CLI, prefer the Quick Start flow above: keep global skills compact with `--preset core`, then install Unity/Cocos skills per project.
 
 For non-interactive installs, set `OMG_ENGINE`:
 
@@ -79,9 +137,9 @@ $env:OMG_REPO = "YourOrg/oh-my-game-kit"; $env:OMG_REF = "feature-branch"; irm h
 OMG_REPO=YourOrg/oh-my-game-kit OMG_REF=feature-branch curl -fsSL https://raw.githubusercontent.com/YourOrg/oh-my-game-kit/feature-branch/scripts/install.sh | sh
 ```
 
-## Direct GitHub Package Usage
+## Run Without Installing The CLI
 
-You can run the CLI directly from GitHub with `npx`:
+You can run the CLI directly from GitHub with `npx`. This is useful for one-off installs, CI, or machines where you do not want to keep `omg-kit` installed globally:
 
 ```sh
 npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --fresh --preset core
@@ -133,13 +191,19 @@ npx --yes @tranvietanh0/oh-my-game-kit doctor --target global
 npx --yes @tranvietanh0/oh-my-game-kit install --target project --engine cocos
 ```
 
-Or install it globally once:
+Or install it globally once from GitHub Packages:
 
 ```sh
 npm install --global @tranvietanh0/oh-my-game-kit
 omg-kit install --target global --fresh --preset core
 omg-kit install --target global --engine cocos
 omg-kit doctor --target global
+```
+
+If GitHub Packages auth is not configured, use the GitHub tarball install from Quick Start instead:
+
+```sh
+npm install --global https://github.com/tranvietanh0/oh-my-game-kit/archive/refs/heads/release.tar.gz
 ```
 
 ### Publish a new package version

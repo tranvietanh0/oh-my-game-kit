@@ -1,6 +1,6 @@
 {
   "name": "oh-my-game-kit",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "provider": "codex",
   "description": "Codex-native Oh My Game Kit core, Unity, and Cocos game-development workflows.",
   "generatedFrom": {
@@ -43,6 +43,10 @@
     "unity-minimal": [
       "omg-base",
       "omg-extended",
+      "base",
+      "editor"
+    ],
+    "unity-project": [
       "base",
       "editor"
     ],
@@ -94,6 +98,10 @@
       "omg-extended",
       "cocos-base"
     ],
+    "cocos-project": [
+      "cocos-base",
+      "cocos-playable"
+    ],
     "cocos-playable": [
       "omg-base",
       "omg-extended",
@@ -103,6 +111,12 @@
     "cocos-full": [
       "omg-base",
       "omg-extended",
+      "cocos-base",
+      "cocos-playable"
+    ],
+    "engine-project": [
+      "base",
+      "editor",
       "cocos-base",
       "cocos-playable"
     ],

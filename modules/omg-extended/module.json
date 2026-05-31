@@ -2,7 +2,7 @@
   "name": "omg-extended",
   "version": "1.89.3",
   "description": "Advanced reasoning, collaboration, and security tools",
-  "required": true,
+  "required": false,
   "dependencies": {
     "omg-base": ">=1.62.0"
   },

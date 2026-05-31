@@ -273,6 +273,12 @@ function normalizeDeps(deps, moduleNameMapper = mapModuleName) {
   return result;
 }
 
+function normalizeCocosDeps(deps) {
+  const result = normalizeDeps(deps, mapCocosModuleName);
+  delete result["omg-extended"];
+  return result;
+}
+
 function importCore(modulesOut, agentsOut) {
   const modulesDir = path.join(coreRoot, ".claude", "modules");
   const flatSkills = path.join(coreRoot, ".claude", "skills");
@@ -311,7 +317,7 @@ function importCore(modulesOut, agentsOut) {
       name: moduleName,
       version: manifest.version ?? "0.1.0",
       description: mapText(manifest.description ?? moduleName),
-      required: moduleName === "omg-base" || moduleName === "omg-extended",
+      required: false,
       dependencies: normalizeDeps(manifest.dependencies),
       skills: mappedSkills,
       agents: mappedAgents,
@@ -424,7 +430,7 @@ function importCocos(modulesOut, agentsOut) {
       version: manifest.version ?? "0.1.0",
       description: mapText(manifest.description ?? moduleName),
       required: false,
-      dependencies: normalizeDeps(manifest.dependencies, mapCocosModuleName),
+      dependencies: normalizeCocosDeps(manifest.dependencies),
       skills: mappedSkills,
       agents: mappedAgents,
       detect: manifest.detect,
@@ -466,7 +472,7 @@ function main() {
 
   writeJson(path.join(repoRoot, "kit.json"), {
     name: "oh-my-game-kit",
-    version: "0.2.2",
+    version: "0.2.3",
     provider: "codex",
     description: "Codex-native Oh My Game Kit core, Unity, and Cocos game-development workflows.",
     generatedFrom: {
@@ -479,12 +485,15 @@ function main() {
       "core": ["omg-base", "omg-extended"],
       "core-maintainer": ["omg-base", "omg-extended", "omg-maintainer"],
       "unity-minimal": ["omg-base", "omg-extended", "base", "editor"],
+      "unity-project": ["base", "editor"],
       "unity-production": ["omg-base", "omg-extended", "base", "editor", "testing", "ui", "rendering", "animation", "audio", "mobile"],
       "unity-dots": ["omg-base", "omg-extended", "base", "editor", "testing", "dots-core", "dots-combat", "dots-nav", "dots-ai", "ui", "rendering"],
       "unity-full": ["omg-base", "omg-extended", ...unity.modules],
       "cocos-minimal": ["omg-base", "omg-extended", "cocos-base"],
+      "cocos-project": ["cocos-base", "cocos-playable"],
       "cocos-playable": ["omg-base", "omg-extended", "cocos-base", "cocos-playable"],
       "cocos-full": ["omg-base", "omg-extended", "cocos-base", "cocos-playable"],
+      "engine-project": ["base", "editor", "cocos-base", "cocos-playable"],
       "full": "*",
     },
   });

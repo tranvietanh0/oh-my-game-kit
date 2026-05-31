@@ -41,6 +41,7 @@ omg-kit install --target global --fresh --preset core
 ### 3. Install engine skills in each project
 
 Run the matching command from the root folder of the project where Codex will work.
+Project engine installs are engine-only by default; they assume the compact global core install from step 2 is already present. This keeps Codex CLI under its skill context budget.
 
 Unity:
 
@@ -228,13 +229,16 @@ node src/cli.js doctor --target global
 - `core`: base Codex workflows
 - `core-maintainer`: core workflows plus maintainer skills
 - `unity-minimal`: core plus Unity base/editor workflows
+- `unity-project`: Unity base/editor workflows only, for project-local Codex CLI installs
 - `unity-production`: Unity base, editor, testing, UI, rendering, animation, audio, and mobile
 - `unity-dots`: Unity base plus DOTS architecture, combat, navigation, AI, rendering, and testing
 - `unity-full`: all Unity modules
 - `cocos-minimal`: core plus Cocos script-graph workflow
+- `cocos-project`: Cocos workflows only, for project-local Codex CLI installs
 - `cocos-playable`: Cocos Creator playable-ad workflows
 - `cocos-full`: all Cocos modules
 - `full`: all modules and all optional Codex agents
+- `engine-project`: Unity base/editor plus Cocos workflows, without global core skills
 
 ## Installed Locations
 
@@ -289,5 +293,5 @@ Pushing `release` runs CI and publishes `@tranvietanh0/oh-my-game-kit` to GitHub
 Users can also pin an exact tag:
 
 ```sh
-npx --yes github:tranvietanh0/oh-my-game-kit#v0.2.2 install --target global --fresh --engine all
+npx --yes github:tranvietanh0/oh-my-game-kit#v0.2.3 install --target global --fresh --engine all
 ```

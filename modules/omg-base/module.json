@@ -2,7 +2,7 @@
   "name": "omg-base",
   "version": "1.101.3",
   "description": "Core workflow — cook, plan, fix, debug, test, review, git, docs",
-  "required": true,
+  "required": false,
   "dependencies": {},
   "skills": [
     "omg-cook",

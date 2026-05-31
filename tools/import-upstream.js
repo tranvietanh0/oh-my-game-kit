@@ -311,7 +311,7 @@ function importCore(modulesOut, agentsOut) {
       name: moduleName,
       version: manifest.version ?? "0.1.0",
       description: mapText(manifest.description ?? moduleName),
-      required: manifest.required ?? true,
+      required: moduleName === "omg-base" || moduleName === "omg-extended",
       dependencies: normalizeDeps(manifest.dependencies),
       skills: mappedSkills,
       agents: mappedAgents,
@@ -466,7 +466,7 @@ function main() {
 
   writeJson(path.join(repoRoot, "kit.json"), {
     name: "oh-my-game-kit",
-    version: "0.2.1",
+    version: "0.2.2",
     provider: "codex",
     description: "Codex-native Oh My Game Kit core, Unity, and Cocos game-development workflows.",
     generatedFrom: {

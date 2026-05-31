@@ -279,7 +279,9 @@ function globalTarget(args) {
   const requestedRoot = args["skills-root"] ? path.resolve(String(args["skills-root"])) : null;
   const skillsRoots = requestedRoot
     ? [requestedRoot]
-    : [path.join(home, ".agents", "skills"), path.join(home, ".codex", "skills")];
+    : args["dual-roots"]
+      ? [path.join(home, ".agents", "skills"), path.join(home, ".codex", "skills")]
+      : [path.join(home, ".codex", "skills")];
   return {
     kind: "global",
     root: home,
@@ -581,10 +583,10 @@ function printHelp() {
 Usage:
   node src/cli.js validate
   node src/cli.js doctor [--target project|global]
-  node src/cli.js install [--target project|global] [--engine unity|cocos|all] [--preset unity-minimal] [--modules a,b] [--fresh] [--force] [--no-agents]
+  node src/cli.js install [--target project|global] [--engine unity|cocos|all] [--preset unity-minimal] [--modules a,b] [--fresh] [--force] [--no-agents] [--dual-roots]
   node src/cli.js uninstall [--target project|global]
 
-Default install target is global. Without --engine, --preset, or --modules, install keeps the legacy unity-minimal fallback. --modules overrides --preset and --engine; --preset overrides --engine. Global installs to both ~/.agents/skills and ~/.codex/skills unless --skills-root is provided. Codex agents are installed to .codex/agents unless --no-agents is passed.
+Default install target is global. Without --engine, --preset, or --modules, install keeps the legacy unity-minimal fallback. --modules overrides --preset and --engine; --preset overrides --engine. Global installs to ~/.codex/skills by default to keep Codex CLI's skill list compact. Use --dual-roots to also install into ~/.agents/skills, or --skills-root to choose one root. Codex agents are installed to .codex/agents unless --no-agents is passed.
 `);
 }
 

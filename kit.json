@@ -1,6 +1,6 @@
 {
   "name": "oh-my-game-kit",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "provider": "codex",
   "description": "Codex-native Oh My Game Kit core, Unity, and Cocos game-development workflows.",
   "generatedFrom": {

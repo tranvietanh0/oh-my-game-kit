@@ -6,7 +6,8 @@ param(
   [string]$Engine = $env:OMG_ENGINE,
   [switch]$Fresh,
   [switch]$Force,
-  [switch]$NoAgents
+  [switch]$NoAgents,
+  [switch]$DualRoots
 )
 
 $ErrorActionPreference = "Stop"
@@ -63,6 +64,7 @@ $ArgsList = @("--yes", $PackageSpec, "install", "--target", $Target, "--preset",
 if ($Fresh -or $env:OMG_FRESH -ne "0") { $ArgsList += "--fresh" }
 if ($Force -or $env:OMG_FORCE -eq "1") { $ArgsList += "--force" }
 if ($NoAgents -or $env:OMG_NO_AGENTS -eq "1") { $ArgsList += "--no-agents" }
+if ($DualRoots -or $env:OMG_DUAL_ROOTS -eq "1") { $ArgsList += "--dual-roots" }
 
 Write-Host "Installing oh-my-game-kit from $PackageSpec"
 npx @ArgsList

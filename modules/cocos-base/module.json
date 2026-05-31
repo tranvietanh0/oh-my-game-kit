@@ -3,9 +3,7 @@
   "version": "1.7.0",
   "description": "Cocos kit baseline: ts-morph + dependency-cruiser script-graph adapter for scene/prefab diagram introspection.",
   "required": false,
-  "dependencies": {
-    "omg-extended": ">=1.65.0 <2.0.0"
-  },
+  "dependencies": {},
   "skills": [
     "omg-cocos-base-script-graph"
   ],

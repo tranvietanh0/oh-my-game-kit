@@ -31,20 +31,19 @@ run(["validate"]);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "omg-kit-test-"));
 try {
   run(["install", "--target", "project", "--fresh", "--engine", "unity"], tmp);
-  assert.equal(fs.existsSync(path.join(tmp, ".agents", "skills", "omg-cook", "SKILL.md")), true);
+  assert.equal(fs.existsSync(path.join(tmp, ".agents", "skills", "omg-cook", "SKILL.md")), false);
   assert.equal(fs.existsSync(path.join(tmp, ".agents", "skills", "omg-unity-base-mcp-skill", "SKILL.md")), true);
   assert.equal(fs.existsSync(path.join(tmp, ".agents", "skills", "omg-cocos-base-script-graph", "SKILL.md")), false);
-  assert.equal(fs.existsSync(path.join(tmp, ".codex", "agents", "omg-fullstack-developer.toml")), true);
+  assert.equal(fs.existsSync(path.join(tmp, ".codex", "agents", "omg-fullstack-developer.toml")), false);
   assert.equal(fs.existsSync(path.join(tmp, ".codex", "agents", "omg-cocos-developer.toml")), false);
   assert.equal(fs.existsSync(path.join(tmp, ".codex", "config.toml")), true);
   const agents = fs.readFileSync(path.join(tmp, "AGENTS.md"), "utf8");
   assert.match(agents, /oh-my-game-kit:start/);
   const state = JSON.parse(fs.readFileSync(path.join(tmp, ".oh-my-game-kit", "install-state.json"), "utf8"));
   assert.equal(state.engine, "unity");
-  assert.equal(state.preset, "unity-production");
+  assert.equal(state.preset, "unity-project");
   run(["doctor", "--target", "project"], tmp);
   run(["uninstall", "--target", "project"], tmp);
-  assert.equal(fs.existsSync(path.join(tmp, ".agents", "skills", "omg-cook")), false);
   assert.equal(fs.existsSync(path.join(tmp, ".codex", "agents", "omg-fullstack-developer.toml")), false);
 } finally {
   fs.rmSync(tmp, { recursive: true, force: true });
@@ -55,6 +54,7 @@ try {
   run(["install", "--target", "project", "--fresh", "--engine", "cocos"], cocosTmp);
   assert.equal(fs.existsSync(path.join(cocosTmp, ".agents", "skills", "omg-cocos-base-script-graph", "SKILL.md")), true);
   assert.equal(fs.existsSync(path.join(cocosTmp, ".agents", "skills", "omg-cocos-playable-parameter", "SKILL.md")), true);
+  assert.equal(fs.existsSync(path.join(cocosTmp, ".agents", "skills", "omg-cook", "SKILL.md")), false);
   assert.equal(fs.existsSync(path.join(cocosTmp, ".agents", "skills", "omg-unity-base-mcp-skill", "SKILL.md")), false);
   assert.equal(fs.existsSync(path.join(cocosTmp, ".codex", "agents", "omg-cocos-playable-extractor.toml")), true);
   assert.equal(fs.existsSync(path.join(cocosTmp, ".codex", "agents", "omg-unity-developer.toml")), false);
@@ -68,6 +68,7 @@ try {
   run(["install", "--target", "project", "--fresh", "--engine", "all"], allTmp);
   assert.equal(fs.existsSync(path.join(allTmp, ".agents", "skills", "omg-cocos-playable-parameter", "SKILL.md")), true);
   assert.equal(fs.existsSync(path.join(allTmp, ".agents", "skills", "omg-unity-base-mcp-skill", "SKILL.md")), true);
+  assert.equal(fs.existsSync(path.join(allTmp, ".agents", "skills", "omg-cook", "SKILL.md")), false);
 } finally {
   fs.rmSync(allTmp, { recursive: true, force: true });
 }

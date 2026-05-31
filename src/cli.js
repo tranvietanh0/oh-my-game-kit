@@ -16,6 +16,11 @@ const ENGINE_PRESETS = {
   cocos: "cocos-playable",
   all: "full",
 };
+const PROJECT_ENGINE_PRESETS = {
+  unity: "unity-project",
+  cocos: "cocos-project",
+  all: "engine-project",
+};
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -164,7 +169,7 @@ function validateEngine(engine) {
   }
 }
 
-function resolveInstallSelection(args, kit, modules) {
+function resolveInstallSelection(args, kit, modules, targetKind = "global") {
   if (args.modules) {
     return {
       engine: "custom",
@@ -185,7 +190,7 @@ function resolveInstallSelection(args, kit, modules) {
   if (args.engine) {
     const engine = String(args.engine).toLowerCase();
     validateEngine(engine);
-    const preset = ENGINE_PRESETS[engine];
+    const preset = targetKind === "project" ? PROJECT_ENGINE_PRESETS[engine] : ENGINE_PRESETS[engine];
     return {
       engine,
       preset,
@@ -449,9 +454,9 @@ function install(args) {
   }
 
   const { kit, modules } = loadKit();
-  const selection = resolveInstallSelection(args, kit, modules);
-  const moduleNames = resolveModules(selection.requested, kit, modules);
   const target = resolveTarget(args);
+  const selection = resolveInstallSelection(args, kit, modules, target.kind);
+  const moduleNames = resolveModules(selection.requested, kit, modules);
 
   if (args.fresh) removeOldSetup(target);
 
@@ -586,7 +591,7 @@ Usage:
   node src/cli.js install [--target project|global] [--engine unity|cocos|all] [--preset unity-minimal] [--modules a,b] [--fresh] [--force] [--no-agents] [--dual-roots]
   node src/cli.js uninstall [--target project|global]
 
-Default install target is global. Without --engine, --preset, or --modules, install keeps the legacy unity-minimal fallback. --modules overrides --preset and --engine; --preset overrides --engine. Global installs to ~/.codex/skills by default to keep Codex CLI's skill list compact. Use --dual-roots to also install into ~/.agents/skills, or --skills-root to choose one root. Codex agents are installed to .codex/agents unless --no-agents is passed.
+Default install target is global. Without --engine, --preset, or --modules, install keeps the legacy unity-minimal fallback. --modules overrides --preset and --engine; --preset overrides --engine. For project installs, --engine selects engine-only presets because core workflow skills should usually live in the compact global install. Global installs to ~/.codex/skills by default to keep Codex CLI's skill list compact. Use --dual-roots to also install into ~/.agents/skills, or --skills-root to choose one root. Codex agents are installed to .codex/agents unless --no-agents is passed.
 `);
 }
 

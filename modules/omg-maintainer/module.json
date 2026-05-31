@@ -2,7 +2,7 @@
   "name": "omg-maintainer",
   "version": "1.105.1",
   "description": "Kit maintainer tools — release, triage, sync, scaffolding",
-  "required": true,
+  "required": false,
   "dependencies": {
     "omg-base": ">=1.62.0"
   },

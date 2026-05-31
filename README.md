@@ -30,7 +30,7 @@ The one-line installer asks which engine to install when `OMG_ENGINE` is not set
 - `Cocos`: installs the `cocos-playable` preset.
 - `Both`: installs the `full` preset.
 
-It installs globally, refreshes managed Oh My Game Kit files, installs skills into both `~/.agents/skills` and `~/.codex/skills`, and installs optional Codex agents into `~/.codex/agents`.
+It installs globally, refreshes managed Oh My Game Kit files, installs skills into `~/.codex/skills`, and installs optional Codex agents into `~/.codex/agents`. The installer keeps one global skill root by default so Codex CLI does not waste its skill context budget on duplicate global skills.
 
 For non-interactive installs, set `OMG_ENGINE`:
 
@@ -54,6 +54,21 @@ $env:OMG_PRESET = "unity-minimal"; irm https://raw.githubusercontent.com/tranvie
 PRESET=unity-minimal curl -fsSL https://raw.githubusercontent.com/tranvietanh0/oh-my-game-kit/release/scripts/install.sh | sh
 ```
 
+For Codex CLI, prefer a compact global preset and install engine-specific skills per project:
+
+```sh
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --fresh --preset core
+```
+
+Then, inside a Unity or Cocos project:
+
+```sh
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target project --engine unity
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target project --engine cocos
+```
+
+If you need the old dual-root behavior for compatibility, add `--dual-roots` or set `OMG_DUAL_ROOTS=1`.
+
 To install from another branch or fork:
 
 ```powershell
@@ -69,7 +84,7 @@ OMG_REPO=YourOrg/oh-my-game-kit OMG_REF=feature-branch curl -fsSL https://raw.gi
 You can run the CLI directly from GitHub with `npx`:
 
 ```sh
-npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --fresh --preset full
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --fresh --preset core
 ```
 
 Useful commands:
@@ -87,6 +102,7 @@ Engine shortcuts:
 npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --engine unity
 npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --engine cocos
 npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --engine all
+npx --yes github:tranvietanh0/oh-my-game-kit#release install --target global --engine all --dual-roots
 ```
 
 ## GitHub Packages Usage
@@ -121,7 +137,7 @@ Or install it globally once:
 
 ```sh
 npm install --global @tranvietanh0/oh-my-game-kit
-omg-kit install --target global --fresh --engine all
+omg-kit install --target global --fresh --preset core
 omg-kit install --target global --engine cocos
 omg-kit doctor --target global
 ```
@@ -138,7 +154,7 @@ Before publishing again, update `package.json` to a new version and create a mat
 git clone https://github.com/tranvietanh0/oh-my-game-kit.git
 cd oh-my-game-kit
 npm run check
-node src/cli.js install --target global --fresh --preset full
+node src/cli.js install --target global --fresh --preset core
 node src/cli.js install --target global --fresh --engine cocos
 node src/cli.js doctor --target global
 ```
@@ -160,12 +176,13 @@ node src/cli.js doctor --target global
 
 Global install:
 
-- `~/.agents/skills/<skill>/SKILL.md`
 - `~/.codex/skills/<skill>/SKILL.md`
 - `~/.codex/agents/*.toml`
 - `~/.codex/config.toml`
 - `~/.codex/AGENTS.md`
 - `~/.codex/.oh-my-game-kit/install-state.json`
+
+Use `--dual-roots` to also install global skills into `~/.agents/skills`.
 
 Project install:
 
@@ -208,5 +225,5 @@ Pushing `release` runs CI and publishes `@tranvietanh0/oh-my-game-kit` to GitHub
 Users can also pin an exact tag:
 
 ```sh
-npx --yes github:tranvietanh0/oh-my-game-kit#v0.2.1 install --target global --fresh --engine all
+npx --yes github:tranvietanh0/oh-my-game-kit#v0.2.2 install --target global --fresh --engine all
 ```

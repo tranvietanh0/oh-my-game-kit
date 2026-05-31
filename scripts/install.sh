@@ -9,6 +9,7 @@ ENGINE="${OMG_ENGINE:-${ENGINE:-}}"
 FRESH="${OMG_FRESH:-1}"
 FORCE="${OMG_FORCE:-0}"
 NO_AGENTS="${OMG_NO_AGENTS:-0}"
+DUAL_ROOTS="${OMG_DUAL_ROOTS:-0}"
 
 preset_for_engine() {
   case "$1" in
@@ -74,6 +75,9 @@ if [ "$FORCE" = "1" ]; then
 fi
 if [ "$NO_AGENTS" = "1" ]; then
   ARGS="$ARGS --no-agents"
+fi
+if [ "$DUAL_ROOTS" = "1" ]; then
+  ARGS="$ARGS --dual-roots"
 fi
 
 echo "Installing oh-my-game-kit from github:$REPO#$REF"
